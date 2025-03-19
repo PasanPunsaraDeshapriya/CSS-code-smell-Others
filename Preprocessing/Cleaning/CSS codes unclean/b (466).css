@@ -1,0 +1,96 @@
+@layer composition {
+  /* https://cube.fyi/composition.html */
+
+  /* TL;DR: Layouts and structural styles */
+  .repel {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--gutter, var(--space-s-m));
+  }
+
+  .cluster {
+    display: flex;
+    flex-wrap: var(--wrap, wrap);
+    flex-direction: var(--direction, row);
+    justify-content: var(--justify, flex-start);
+    align-items: var(--align, center);
+    gap: var(--gutter, var(--space-s-m));
+  }
+
+  .cluster[data-nowrap] {
+    --wrap: nowrap;
+    overflow: auto;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gutter, var(--space-s));
+  }
+
+  .sidebar:not([data-dir]) > :first-child {
+    flex-grow: 1;
+  }
+
+  .sidebar:not([data-dir]) > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: 50%;
+  }
+
+  .sidebar[data-dir="rtl"] > :last-child {
+    flex-grow: 1;
+  }
+
+  .sidebar[data-dir="rtl"] > :first-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-inline-size: var(--sidebar-min-inline-size, 50%);
+  }
+
+  .full-bleed {
+    margin-left: calc(50% - 50vw);
+    max-width: none;
+    width: 100vw;
+  }
+
+  .full-bleed > * {
+    height: auto;
+    max-width: none;
+    width: 100%;
+  }
+
+  .switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+  }
+
+  .switcher > * {
+    flex-grow: 1;
+    flex-basis: calc((--space-14 - 100%) * 999);
+  }
+
+  .switcher > :nth-last-child(n + 5),
+  .switcher > :nth-last-child(n + 5) ~ * {
+    flex-basis: 100%;
+  }
+
+  .grid {
+    --grid-min-item-size: 25ch;
+
+    display: grid;
+    gap: var(--gutter, var(--space-2xl));
+  }
+
+  @supports (width: min(var(--grid-min-item-size), 100%)) {
+    .grid {
+      grid-template-columns: repeat(
+        var(--grid-placement, auto-fit),
+        minmax(min(var(--grid-min-item-size, 20ch), 100%), 1fr)
+      );
+    }
+  }
+}

@@ -1,0 +1,133 @@
+@charset "utf-8";
+/*
+   New Perspectives on HTML5 and CSS3, 7th Edition
+   Tutorial 5
+   Tutorial Case
+   
+   Author:   Randell Fields
+   Date:     12/10/2024
+   
+   Filename: tf_print.css
+
+   This file contains the printer styles used with the Trusted
+   Friends page on articles of interest.
+*/
+
+/* ===========================
+   Hidden Objects for Printing
+   =========================== */
+nav.horizontal,
+aside,
+footer {
+   display: none; /* Hide navigation, aside, and footer for print */
+}
+
+/* =========================
+   Page Box Styles
+   ========================= */
+@page {
+   size: 8.5in 11in; /* Standard letter size: 8.5 x 11 inches */
+   margin: 0.5in; /* Set uniform margins of 0.5 inches */
+}
+
+body {
+   margin: 0;
+   padding: 1em;
+   font-family: "Times New Roman", serif; /* Improved font clarity */
+   font-size: 12pt;
+   line-height: 1.5;
+   color: black;
+   background: none; /* Remove all backgrounds for print clarity */
+}
+
+/* =========================
+   Typography Styles
+   ========================= */
+h1 {
+   font-size: 28pt;
+   line-height: 1.1; /* Maintain proportional line height */
+   margin: 0.3in 0in 0.2in; /* Top and bottom spacing */
+   page-break-after: avoid; /* Prevent page break immediately after */
+}
+
+h2 {
+   font-size: 20pt;
+   line-height: 1.2;
+   margin: 0.1in 0in 0.1in 0.3in;
+   page-break-after: avoid; /* Prevent break immediately after */
+}
+
+p {
+   font-size: 12pt;
+   margin: 0.1in 0in 0.1in 0.3in; /* Consistent paragraph spacing */
+}
+
+/* =========================
+   List Styles
+   ========================= */
+ul {
+   list-style-type: disc;
+   margin-left: 0.5in; /* Indent for clarity in print */
+}
+
+/* =========================
+   Header Styles
+   ========================= */
+body > header {
+   text-align: right;
+   margin-bottom: 1em; /* Add spacing below header */
+}
+
+body > header > img {
+   display: block;
+   width: 100%; /* Scale header image to page width */
+   height: auto;
+   margin: 0 auto;
+   page-break-inside: avoid; /* Prevent header from splitting across pages */
+}
+
+/* =========================
+   Image Styles
+   ========================= */
+article img {
+   border: 2px solid rgb(191, 191, 191); /* Subtle gray border for images */
+   display: block;
+   margin: 0.25in auto; /* Center images horizontally */
+   width: 65%; /* Set width to balance image size and text */
+   page-break-inside: avoid; /* Ensure images stay whole */
+}
+
+/* =========================
+   Hypertext Styles
+   ========================= */
+a {
+   color: black; /* Use black for legibility */
+   text-decoration: none; /* Remove underline */
+}
+
+a::after {
+   content: " (" attr(href) ")"; /* Append URL in parentheses */
+   font-weight: bold; /* Highlight the URL in bold */
+   word-wrap: break-word; /* Allow URLs to wrap to prevent overflow */
+}
+
+/* =========================
+   Page Break Styles
+   ========================= */
+article:nth-of-type(n+2) {
+   page-break-before: always; /* Begin new page for articles after the first */
+}
+
+h1,
+h2 {
+   page-break-after: avoid; /* Prevent page breaks directly after headers */
+}
+
+img, ol, ul {
+   page-break-inside: avoid;
+}
+
+p {
+   orphans: 3;
+   widows: 3;
+}

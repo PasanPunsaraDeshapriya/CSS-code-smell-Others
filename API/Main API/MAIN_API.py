@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 # Load the trained model
-MODEL_PATH = r"d:\IIT 4th year\FYP\Creation\API\new api\css_smell_predictor_all_4.pkl"
+MODEL_PATH = r"d:\IIT 4th year\FYP\Creation\API\Main API\css_smell_predictor_all_4.pkl"
 clf = joblib.load(MODEL_PATH)
 
 # Feature extraction function

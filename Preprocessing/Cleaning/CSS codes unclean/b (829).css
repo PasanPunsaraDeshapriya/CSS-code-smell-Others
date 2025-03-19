@@ -1,0 +1,286 @@
+/*
+* MIT License
+* Copyright (c) 2017 Sumit Kumar
+*/
+
+.marker-icon,
+.marker-icon:focus {
+  background-color: #ffffff;
+  border: 1px solid #3388ff;
+  border-radius: 50%;
+  margin: -8px 0 0 -8px !important;
+  width: 14px !important;
+  height: 14px !important;
+  outline: 0;
+  transition: opacity ease 0.3s;
+}
+
+.marker-icon-middle,
+.marker-icon-middle:focus {
+  opacity: 0.7;
+  margin: -6px 0 0 -6px !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+
+.leaflet-pm-draggable {
+  cursor: move !important;
+}
+
+.cursor-marker {
+  cursor: crosshair;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.cursor-marker.visible {
+  opacity: 1 !important;
+}
+
+.leaflet-pm-invalid {
+  stroke: red;
+  transition: fill ease 0s, stroke ease 0s;
+}
+
+.rect-style-marker,
+.rect-start-marker {
+  opacity: 0;
+}
+
+.rect-style-marker.visible,
+.rect-start-marker.visible {
+  opacity: 1 !important;
+}
+
+.vertexmarker-disabled {
+  opacity: 0.7;
+}
+
+.pm-text-marker {
+  width: 0;
+  height: 0;
+}
+
+.pm-textarea {
+    background-color: #fff;
+    color: #000;
+    resize: none;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 3px;
+    padding-left: 7px;
+    padding-bottom: 0;
+    padding-top: 4px;
+}
+
+.leaflet-pm-draggable .pm-textarea {
+  cursor: move;
+}
+
+.pm-textarea:focus,
+.pm-textarea:focus-within,
+.pm-textarea:focus-visible,
+.pm-textarea:active {
+  border: 2px solid #000;
+  outline: 0;
+}
+
+.pm-textarea.pm-disabled {
+  border: none;
+  user-select: none;
+}
+
+.pm-textarea.pm-hasfocus {
+  cursor: auto;
+}
+
+.leaflet-pm-toolbar .leaflet-buttons-control-button {
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 3;
+}
+
+.leaflet-pm-toolbar
+  .leaflet-pm-actions-container
+  a.leaflet-pm-action:first-child:not(.pos-right),
+.leaflet-pm-toolbar
+  .leaflet-pm-actions-container
+  a.leaflet-pm-action:last-child.pos-right {
+  border-radius: 0;
+}
+
+.leaflet-pm-toolbar .button-container a.leaflet-buttons-control-button {
+  border-radius: 0;
+}
+
+.leaflet-pm-toolbar
+  .button-container:last-child
+  a.leaflet-buttons-control-button {
+  border-radius: 0 0 2px 2px;
+}
+
+.leaflet-pm-toolbar
+  .button-container:first-child
+  a.leaflet-buttons-control-button {
+  border-radius: 2px 2px 0 0;
+}
+
+.leaflet-pm-toolbar
+  .button-container:last-child
+  a.leaflet-buttons-control-button {
+  border-bottom: none;
+}
+
+.leaflet-pm-toolbar .control-fa-icon {
+  font-size: 19px;
+  line-height: 24px;
+}
+
+.leaflet-pm-toolbar .control-icon {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.leaflet-pm-toolbar .leaflet-pm-icon-marker {
+  background-image: url("../media/Marker.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-polygon {
+  background-image: url("../media/Polygon.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-polyline {
+  background-image: url("../media/Line.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-circle {
+  background-image: url("../media/Circle.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-circle-marker {
+   background-image: url("../media/CircleMarker.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-rectangle {
+  background-image: url("../media/Rectangle.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-delete {
+  background-image: url("../media/Eraser.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-edit {
+  background-image: url("../media/Edit_Vertex.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-drag {
+  background-image: url("../media/Move.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-cut {
+  background-image: url("../media/Scissors.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-snapping {
+  background-image: url("../media/Magnet.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-rotate {
+  background-image: url("../media/Rotate.svg");
+}
+.leaflet-pm-toolbar .leaflet-pm-icon-text {
+  background-image: url("../media/Text.svg");
+}
+
+.leaflet-buttons-control-button:hover,
+.leaflet-buttons-control-button:focus {
+  cursor: pointer;
+  background-color: #f4f4f4;
+}
+.active .leaflet-buttons-control-button {
+  box-shadow: inset 0 -1px 5px 2px rgba(81, 77, 77, 0.31);
+}
+
+.leaflet-buttons-control-text-hide {
+  display: none;
+}
+
+.button-container {
+  position: relative;
+}
+
+.button-container .leaflet-pm-actions-container {
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  display: none;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+.leaflet-right
+  .leaflet-pm-toolbar
+  .button-container
+  .leaflet-pm-actions-container {
+  right: 100%;
+  left: auto;
+}
+
+.button-container.active .leaflet-pm-actions-container {
+  display: block;
+}
+
+.button-container
+  .leaflet-pm-actions-container:not(.pos-right)
+  a.leaflet-pm-action:last-child {
+  border-radius: 0 3px 3px 0;
+  border-right: 0;
+}
+.button-container
+  .leaflet-pm-actions-container.pos-right
+  a.leaflet-pm-action:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.button-container
+  .leaflet-pm-actions-container.pos-right
+  a.leaflet-pm-action:last-child {
+  border-right: 0;
+}
+.button-container .leaflet-pm-actions-container .leaflet-pm-action {
+  padding: 0 10px;
+  background-color: #666;
+  color: #fff;
+  display: inline-block;
+  width: auto;
+  border-right: 1px solid #eee;
+  user-select: none;
+  border-bottom: none;
+  height: 29px;
+  line-height: 29px;
+}
+.leaflet-pm-toolbar
+  .button-container:first-child.pos-right.active
+  a.leaflet-buttons-control-button {
+  border-top-left-radius: 0;
+}
+.leaflet-pm-toolbar
+  .button-container:first-child.active:not(.pos-right)
+  a.leaflet-buttons-control-button {
+  border-top-right-radius: 0;
+}
+
+.button-container .leaflet-pm-actions-container .leaflet-pm-action:hover,
+.button-container .leaflet-pm-actions-container .leaflet-pm-action:focus {
+  cursor: pointer;
+  background-color: #777;
+}
+
+/* That the active control is always over the other controls */
+.leaflet-pm-toolbar.activeChild {
+  z-index: 801;
+}
+
+.leaflet-buttons-control-button.pm-disabled {
+  background-color: #f4f4f4;
+}
+
+.leaflet-buttons-control-button.pm-disabled > .control-icon {
+  filter: opacity(0.6);
+}
+

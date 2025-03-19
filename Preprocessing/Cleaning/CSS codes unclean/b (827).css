@@ -1,0 +1,112 @@
+
+.center {
+  box-sizing: content-box;
+  max-inline-size: calc(var(--content-width-default));
+  margin-inline: auto;
+  padding-inline-start: var(--content-sides-space-default);
+  padding-inline-end: var(--content-sides-space-default);
+}
+.center.and-text {
+  text-align: center;
+}
+
+
+.stack > * {
+  margin-block: 0;
+}
+.stack:only-child {
+  block-size: 100%;
+}
+.stack > * + * {
+  margin-block-start: var(--space-initial);
+}
+.stack.exception-smaller > * + * {
+  margin-block-start: var(--space-smaller);
+}
+.stack.exception-small > * + * {
+  margin-block-start: var(--space-small);
+}
+.stack.exception-larger > * + * {
+  margin-block-start: var(--space-larger);
+}
+.stack.exception-large > * + * {
+  margin-block-start: var(--space-large);
+}
+.stack.exception-x-large > * + * {
+  margin-block-start: var(--space-x-large);
+}
+.stack.exception-xx-large > * + * {
+  margin-block-start: var(--space-xx-large);
+}
+.stack.exception-xxx-large > * + * {
+  margin-block-start: var(--space-xxx-large);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-initial);
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.cluster.justify-center {
+  justify-content: center;
+}
+.cluster.justify-space-between {
+  justify-content: space-between;
+}
+.cluster.justify-end {
+  justify-content: end;
+}
+.cluster.align-center {
+  align-items: center;
+}
+.cluster.gap-small {
+  gap: var(--space-small);
+}
+  
+
+
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc(( 700px - 100%) * 999);
+}
+
+
+.grid {
+  display: grid;
+  grid-gap: 25px;
+}
+@supports (width: min(300px, 100%)) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  }
+}
+
+
+.box {
+  padding: var(--space-initial);
+  border: 1px solid var(--border-color-dark-secondary);;
+  outline: 1px transparent;
+  outline-offset: calc(1px * -1);
+  color: var(--text-color-dark-primary);
+  background-color: var(--bg-color-light-secondary);
+}
+.box.no-padding {
+  padding: 0;
+}
+.box.no-border {
+  border-width: 0;
+}
+.box * {
+  color: inherit;
+}
+.box.invert {
+  color: var(--bg-color-light-primary);
+  background-color: var(--text-color-dark-primary);
+}

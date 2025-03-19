@@ -1,0 +1,191 @@
+.list {
+  display: grid;
+  margin: 0;
+  /* https://css-tricks.com/responsive-layouts-fewer-media-queries/ */
+  --w: 280px;
+  --n: 2;
+  gap: var(--size-gap);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(max(var(--w), 100%/ (var(--n) + 1) + 0.1%), 1fr)
+  );
+  margin-bottom: var(--size-gap);
+  margin-top: var(--size-gap);
+}
+
+.listItem {
+  margin: 0;
+}
+
+.listItem::marker {
+  color: #e95800;
+}
+
+.listItem:nth-child(2)::marker {
+  color: #159bf3;
+}
+
+.listItem:nth-child(3)::marker {
+  color: #8eb814;
+}
+
+.listItem:nth-child(4)::marker {
+  color: #663399;
+}
+
+.listItemLink {
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.listItemDescription {
+  color: var(--color-text);
+  margin-bottom: 0;
+  margin-top: var(--space-1);
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.intro {
+  max-width: none;
+  line-height: var(--line-height-loose);
+}
+
+.carouselContent {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 200px;
+}
+
+.menuContainer {
+  align-items: center;
+  background: linear-gradient( var(--color-container-header-shadow), var(--color-container-header-light));
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.buttonMenu {
+  background: linear-gradient(var(--deg-shadow-default-rotation),var(--color-primary), var(--color-primary-shadow));
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 5px;
+  height: fit-content;
+  font-weight: normal;
+  border: 1px solid #0587ff;
+  border-radius: 5px;
+}
+
+.buttonPages {
+  width: 100%;
+  text-align: center;
+  margin: 0 10px;
+  transition: box-shadow 0.2s ease-in-out ;
+  box-shadow: 0px 1px 5px var(--color-button-light-shadow);
+}
+
+.buttonPages:hover {
+  transition: box-shadow 0.2s ease-in-out ;
+  box-shadow: 0px 1px 10px var(--color-button-light-shadow);
+}
+
+.buttonPages:active {
+  box-shadow: 0px 1px 5px var(--color-button-light-active-shadow);
+}
+
+.buttonPages:first-child {
+  margin: 0 10px 0 0;
+}
+
+.buttonPages:last-child {
+  margin: 0 0 0 10px;
+}
+
+.buttonSocial {
+  width: 100%;
+  text-align: center;
+  transition: box-shadow 0.2s ease-in-out ;
+  box-shadow: 0px 1px 5px var(--color-button-light-shadow-second);
+}
+
+.buttonSocial:hover {
+  transition: box-shadow 0.2s ease-in-out ;
+  box-shadow: 0px 1px 8px var(--color-button-light-shadow-second);
+}
+
+.buttonSocial:active {
+  box-shadow: 0px 1px 5px var(--color-button-light-active-shadow-second);
+}
+
+.buttonSocial {
+  margin: 0 10px;
+}
+
+.buttonSocial:first-child {
+  margin: 0 10px 0 0;
+}
+
+.buttonSocial:last-child {
+  margin: 0 0 0 10px;
+}
+
+.containerInternalLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.containerSocialLinks {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.avatarSVG {
+  min-width: 300px;
+  width: 400px;
+  max-width: 500px;
+}
+
+.galleryMain {
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 25% 75%,
+    transparent
+  );
+}
+
+.galleryMain h1 {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.galleryContainer {
+  width: 100%;
+  min-width: calc(var(--cardSize) * var(--quantityCards));
+  height: 400px;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 10px 0;
+}
