@@ -1,0 +1,200 @@
+.training {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.training-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.training-header h1 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.training-header p {
+  color: var(--text-light);
+}
+
+.training-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.filter-btn {
+  background: var(--white);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.filter-btn:hover {
+  background: var(--accent-color);
+  color: var(--white);
+}
+
+.filter-btn.active {
+  background: var(--accent-color);
+  color: var(--white);
+}
+
+.training-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.training-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.training-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  transition: var(--transition);
+}
+
+.training-card.upcoming::before {
+  background: #4CAF50;
+}
+
+.training-card.completed::before {
+  background: #2196F3;
+}
+
+.training-card.pending::before {
+  background: #FF9800;
+}
+
+.training-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.training-info h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.training-info p {
+  color: var(--text-light);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.training-meta {
+  display: flex;
+  gap: 1.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.training-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.material-btn, .register-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.material-btn {
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.material-btn:hover {
+  background: var(--text-light);
+  color: var(--white);
+}
+
+.register-btn {
+  background: var(--accent-color);
+  color: var(--white);
+}
+
+.register-btn:hover {
+  background: var(--primary-color);
+}
+
+/* סטטוס תגיות */
+.training-card::after {
+  content: attr(data-status);
+  position: absolute;
+  top: 1rem;
+  left: -2rem;
+  background: var(--accent-color);
+  color: var(--white);
+  padding: 0.3rem 2rem;
+  transform: rotate(-45deg);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.training-card:hover::after {
+  opacity: 1;
+  left: -1rem;
+}
+
+@media (max-width: 768px) {
+  .training-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .training-list {
+    grid-template-columns: 1fr;
+  }
+
+  .training-card {
+    padding: 1.2rem;
+  }
+
+  .training-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .training-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .material-btn, .register-btn {
+    width: 100%;
+    text-align: center;
+  }
+} 

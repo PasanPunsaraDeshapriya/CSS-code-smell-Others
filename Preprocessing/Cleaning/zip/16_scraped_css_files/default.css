@@ -1,0 +1,871 @@
+﻿/* 
+-------------------------
+	DEFAULTS 
+-------------------------
+
+	Brand Palette:	Hex values given directly in style guide, may not match Pantone.com
+
+	GoldenSky:		#ffd200;	rgb(255,210,0);
+	GreenMtn:		#81bd41;	rgb(129,189,65);	--> #57A700 (WCAG AA large text, UI components)
+	BlueOcean:		#00a8e1;	rgb(0,168,225);		--> #00a0d5 (WCAG AA large text, UI components)
+	BlueMidnight:	#1b3e6f;	rgb(27,62,111);
+	GraySlate:		#51748b;	rgb(81,116,139);
+	WhiteCloud:		#f4f4f7;	rgb(244,244,247);
+
+	BlueSea:		#0073c3;	rgb(0,115,195);		--> Special Intermediate Blue used for UI/Text AA accessibility on at worst #f4f4f7;. 
+
+	BlueCloud:		#d1e7f7;	rgb(209,231,247);	from App Design  -. for hover, use: 0068B3
+	BlueMist:		#92cbec;	rgb(146,203,236);	from App Design
+
+	Games Palette:	Hex values given directly in style guide, may not match Pantone.com
+
+	Pick3LtGreen:	#00a94f;	rgb(0,169,79);
+	Pick3Green:		#00853f;	rgb(0,133,63);
+	Pick4LtBlue:	#0094c9;	rgb(0,148,201);
+	Pick4Blue:		#005978;	rgb(0,89,120);
+	Cash5Plum:		#95368e;	rgb(149,54,142);
+	Cash5DkPlum:	#4d2f47;	rgb(77,47,71);
+	CashPopPink:	#e92bb4;	rgb(233,43,180);
+	CashPopPinkDark:#c60c80;	rgb(198,12,128)
+	LuckyGreen:		#00853f;	rgb(0,133,63);
+	LuckyDkGreen:	#1c5631;	rgb(28,86,49);
+	LuckyGray:		#a3a9ac;	rgb(163,169,172);
+	LuckyDkGray:	#7c858c;	rgb(124,133,140);
+	PowerRed:		#ed1c2c;	rgb(237,28,44);
+	PowerCoolGrey:	#bcbec0;	rgb(188,190,192);
+	MegaBlue:		#160b8b;	rgb(22,11,139);  or from GUide Adobe: #160b8b; rgb(22,11,139) from convert: #0753a1;rgb(7,83,161)
+	MegaRed:		#ef4037;	rgb(239,65,56);
+	KenoOrange:		#f15a22;	rgb(241,90,34);		(not in guide, #f15a22) (pantone = #dc4405, which is too red)
+	KenoRed:		#ab2328;	rgb(171,35,40);		(not in guide, taken from pantone.com)
+	FastPlayBlue:	#10069F;	rgb(16,6,159);
+	FastPlayGreen:	#97D700;	rgb(151,215,0);		(lime background gradient #e6ffab)
+	FastPlayGradient #297CC0 -> #4FC8EE				(lt blue -> dk blue gradient 2021)
+	FireballRed		#d42e12;	rgb(218,41,28);		Pantone / PMS 485 / #d42e12 
+	*/
+
+:root {
+	--BlueCloud: #d1e7f7;
+	--BlueMidnight: #1b3e6f;
+	--BlueMist: #92cbec;
+	--BlueOcean: #00a8e1;
+	--BlueSea: #0073c3;
+	--DarkSlate: #4A697D;
+	--GoldenSky: #ffd200;
+	--GraySlate: #51748b;
+	--GreenMtn: #81bd41;
+	--Slate: #51748b;
+	--WhiteCloud: #f4f4f7;
+	--CloudSlate: rgba(27,62,111,0.20);
+	--Pick3GreenLight: #00a94f;
+	--Pick3Green: #00853f;
+	--Pick3GreenDark: #00853f;
+	--Pick4BlueLight: #0094c9;
+	--Pick4Blue: #005978;
+	--Cash5Plum: #95368e;
+	--Cash5PlumDark: #4d2f47;
+	--CashPopPink: #e92bb4;
+	--CashPopPinkDark: #c60c80;
+	--LuckyGreen: #00853f;
+	--LuckyGreenDark: #1c5631;
+	--LuckyGray: #a3a9ac;
+	--LuckyGrayDark: #7c858c;
+	--PowerRed: #ed1c2c;
+	--PowerGrey: #bcbec0;
+	--MegaBlue: #160b8b;
+	--MegaRed: #ef4037;
+	--KenoOrange: #f15a22;
+	--KenoRed: #ab2328;
+	--KenoYellow: #ffd200;
+	--FastPlayBlue: #10069F;
+	--FastPlayGreen: #97d700;
+	--FireballRed: #d42e12;
+	--LabelGray: #58748b; 
+	--SVGStar: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' width='64' height='64'%3E%3Cpath style='fill:%23ffd200;' d='M49.3,29.8c0.8-1.8,8-18.5,8-18.5s-17.6,4.4-19.5,4.9C36.3,14.9,22.7,2.9,22.7,2.9S21.4,21,21.3,23C19.6,24,4,33.3,4,33.3s16.7,6.8,18.7,7.5c0.5,2,4.4,19.6,4.4,19.6S38.7,46.5,40,45c2,0.2,20,1.9,20,1.9S50.5,31.7,49.3,29.8'/%3E%3C/svg%3E");
+	--SVGStars: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' width='64' height='64'%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M57.1,26.4c0,0-9.2,5.4-11.1,6.6c1,0.4,12,4.8,12,4.8s2.6,11.4,2.8,12.6c0.5-0.6,2.2-2.1,3.2-3.8V18.8c-2-2.1-5.1-4.5-6-5.3 C57.8,15.8,57.1,26.4,57.1,26.4z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M30.3,41.8c0.8-0.9,4.4-5.2,4.4-5.2s5.6,0.5,6.8,0.6c-0.1-0.2-3.6-5.8-3.6-5.8s2.2-5.2,2.7-6.3c-1.1,0.3-6.6,1.7-6.6,1.7 s-4.2-3.7-5.1-4.5c-0.1,1.2-0.5,6.8-0.5,6.8s-4.9,2.9-5.9,3.5c0.5,0.2,6.3,2.6,6.3,2.6S30.2,41.1,30.3,41.8z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M60.4,61.1c0,0-3.2,1.9-5,2.9H64v-7c-1-1.1-2.7-2.4-3.2-2.8C60.8,55.4,60.4,61.1,60.4,61.1z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M5.9,63.4c0,0,2.2-5.2,2.7-6.3C7.4,57.4,2,58.8,2,58.8S1,58,0,57v7h6.3C6,63.6,5.9,63.4,5.9,63.4z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M9.5,5.1C9.4,5,7.2,1.5,6.3,0H0v7.7c1-1.5,2.7-3.2,2.7-3.2S8.3,5,9.5,5.1z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M60.8,3.1c0,0,1.4,6,1.5,6.7c0.3-0.3,0.7-1.1,1.7-2V0h-8.6c-0.4,0.2-0.7,0.4-0.9,0.5C55,0.8,60.8,3.1,60.8,3.1z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M26,5.9c0,0,2.6,11.4,2.8,12.6c1.4-1.7,8.3-9.9,8.3-9.9s10.7,1,12.9,1.2c-0.2-0.3-4.4-7-6.1-9.7H15.7C15,0.5,14.4,0.8,14,1 C15,1.5,26,5.9,26,5.9z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M48.2,50.9c-2.2,0.5-12.5,3.2-12.5,3.2s-8-7.1-9.7-8.5c-0.1,2.2-0.9,12.9-0.9,12.9S19,62,15.7,64h28.1 c-0.5-0.7-0.8-1.2-0.8-1.2S47.4,53,48.2,50.9z'/%3E%3Cpath style='fill:rgba(0,0,0,1);' d='M18,41.7c-0.2-0.4-6.9-11-6.9-11s4.3-9.8,5.1-11.9c-2.2,0.5-12.5,3.2-12.5,3.2S2,20.6,0,18.8v27.9c2-2.9,5.1-6.1,5.1-6.1 S15.8,41.5,18,41.7z'/%3E%3C/svg%3E");
+	--SVGRings: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M11.64,14a2.15,2.15,0,1,1,2.14-2.14A2.15,2.15,0,0,1,11.64,14Zm0-3.54a1.4,1.4,0,1,0,0,2.79,1.4,1.4,0,0,0,0-2.79Z'/%3E%3Cpath d='M50.64,32a2.15,2.15,0,1,1,2.14-2.14A2.15,2.15,0,0,1,50.64,32Zm0-3.54a1.4,1.4,0,1,0,0,2.79,1.4,1.4,0,0,0,0-2.79Z'/%3E%3Cpath d='M26.64,50a2.15,2.15,0,1,1,2.14-2.14A2.15,2.15,0,0,1,26.64,50Zm0-3.54a1.4,1.4,0,1,0,0,2.79,1.4,1.4,0,0,0,0-2.79Z'/%3E%3Cpath d='M33.64,40a2.15,2.15,0,1,1,2.14-2.14A2.15,2.15,0,0,1,33.64,40Zm0-3.54a1.4,1.4,0,1,0,0,2.79,1.4,1.4,0,0,0,0-2.79Z'/%3E%3Cpath d='M31.71,15A1.25,1.25,0,1,1,33,13.71,1.25,1.25,0,0,1,31.71,15Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,31.71,13.21Z'/%3E%3Cpath d='M58.71,4A1.25,1.25,0,1,1,60,2.71,1.25,1.25,0,0,1,58.71,4Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,58.71,2.21Z'/%3E%3Cpath d='M37.71,53A1.25,1.25,0,1,1,39,51.71,1.25,1.25,0,0,1,37.71,53Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,37.71,51.21Z'/%3E%3Cpath d='M25.71,59A1.25,1.25,0,1,1,27,57.71,1.25,1.25,0,0,1,25.71,59Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,25.71,57.21Z'/%3E%3Cpath d='M4.71,18A1.25,1.25,0,1,1,6,16.71,1.25,1.25,0,0,1,4.71,18Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,4.71,16.21Z'/%3E%3Cpath d='M5.71,5A1.25,1.25,0,1,1,7,3.71,1.25,1.25,0,0,1,5.71,5Zm0-1.75a.5.5,0,0,0-.5.5.5.5,0,0,0,.5.5.51.51,0,0,0,.5-.5A.5.5,0,0,0,5.71,3.21Z'/%3E%3Ccircle cx='44.05' cy='15.63' r='0.36'/%3E%3Ccircle cx='45.2' cy='15.94' r='0.36'/%3E%3Ccircle cx='46.05' cy='19.09' r='0.36'/%3E%3Ccircle cx='46.36' cy='17.94' r='0.36'/%3E%3Ccircle cx='46.05' cy='16.78' r='0.36'/%3E%3Ccircle cx='45.2' cy='19.94' r='0.36'/%3E%3Ccircle cx='44.05' cy='20.25' r='0.36'/%3E%3Ccircle cx='42.89' cy='19.94' r='0.36'/%3E%3Ccircle cx='42.05' cy='19.09' r='0.36'/%3E%3Ccircle cx='41.74' cy='17.94' r='0.36'/%3E%3Ccircle cx='42.05' cy='16.78' r='0.36'/%3E%3Ccircle cx='42.89' cy='15.94' r='0.36'/%3E%3Ccircle cx='49.05' cy='47.63' r='0.36'/%3E%3Ccircle cx='50.2' cy='47.94' r='0.36'/%3E%3Ccircle cx='51.05' cy='51.09' r='0.36'/%3E%3Ccircle cx='51.36' cy='49.94' r='0.36'/%3E%3Ccircle cx='51.05' cy='48.78' r='0.36'/%3E%3Ccircle cx='50.2' cy='51.94' r='0.36'/%3E%3Ccircle cx='49.05' cy='52.25' r='0.36'/%3E%3Ccircle cx='47.89' cy='51.94' r='0.36'/%3E%3Ccircle cx='47.05' cy='51.09' r='0.36'/%3E%3Ccircle cx='46.74' cy='49.94' r='0.36'/%3E%3Ccircle cx='47.05' cy='48.78' r='0.36'/%3E%3Ccircle cx='47.89' cy='47.94' r='0.36'/%3E%3Ccircle cx='20.05' cy='18.63' r='0.36'/%3E%3Ccircle cx='21.2' cy='18.94' r='0.36'/%3E%3Ccircle cx='22.05' cy='22.09' r='0.36'/%3E%3Ccircle cx='22.36' cy='20.94' r='0.36'/%3E%3Ccircle cx='22.05' cy='19.78' r='0.36'/%3E%3Ccircle cx='21.2' cy='22.94' r='0.36'/%3E%3Ccircle cx='20.05' cy='23.25' r='0.36'/%3E%3Ccircle cx='18.89' cy='22.94' r='0.36'/%3E%3Ccircle cx='18.05' cy='22.09' r='0.36'/%3E%3Ccircle cx='17.74' cy='20.94' r='0.36'/%3E%3Ccircle cx='18.05' cy='19.78' r='0.36'/%3E%3Ccircle cx='18.89' cy='18.94' r='0.36'/%3E%3Ccircle cx='14.05' cy='49.63' r='0.36'/%3E%3Ccircle cx='15.2' cy='49.94' r='0.36'/%3E%3Ccircle cx='16.05' cy='53.09' r='0.36'/%3E%3Ccircle cx='16.36' cy='51.94' r='0.36'/%3E%3Ccircle cx='16.05' cy='50.78' r='0.36'/%3E%3Ccircle cx='15.2' cy='53.94' r='0.36'/%3E%3Ccircle cx='14.05' cy='54.25' r='0.36'/%3E%3Ccircle cx='12.89' cy='53.94' r='0.36'/%3E%3Ccircle cx='12.05' cy='53.09' r='0.36'/%3E%3Ccircle cx='11.74' cy='51.94' r='0.36'/%3E%3Ccircle cx='12.05' cy='50.78' r='0.36'/%3E%3Ccircle cx='12.89' cy='49.94' r='0.36'/%3E%3C/svg%3E");
+	--SVGMatrix: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='4' cy='4' r='2'/%3E%3Ccircle cx='12' cy='12' r='2'/%3E%3Ccircle cx='28' cy='20' r='2'/%3E%3Ccircle cx='28' cy='4' r='2'/%3E%3Ccircle cx='52' cy='4' r='2'/%3E%3Ccircle cx='44' cy='20' r='2'/%3E%3Ccircle cx='52' cy='20' r='2'/%3E%3Ccircle cx='36' cy='28' r='2'/%3E%3Ccircle cx='28' cy='36' r='2'/%3E%3Ccircle cx='20' cy='44' r='2'/%3E%3Ccircle cx='4' cy='52' r='2'/%3E%3Ccircle cx='36' cy='44' r='2'/%3E%3Ccircle cx='36' cy='52' r='2'/%3E%3Ccircle cx='20' cy='60' r='2'/%3E%3Ccircle cx='52' cy='60' r='2'/%3E%3Ccircle cx='60' cy='54' r='2'/%3E%3Ccircle cx='60' cy='44' r='2'/%3E%3Ccircle cx='60' cy='28' r='2'/%3E%3Ccircle cx='54' cy='12' r='0.5'/%3E%3Ccircle cx='44' cy='4' r='0.5'/%3E%3Ccircle cx='52' cy='28' r='0.5'/%3E%3Ccircle cx='28' cy='12' r='0.5'/%3E%3Ccircle cx='36' cy='20' r='0.5'/%3E%3Ccircle cx='28' cy='28' r='0.5'/%3E%3Ccircle cx='20' cy='12' r='0.5'/%3E%3Ccircle cx='20' cy='20' r='0.5'/%3E%3Ccircle cx='4' cy='20' r='0.5'/%3E%3Ccircle cx='12' cy='4' r='0.5'/%3E%3Ccircle cx='12' cy='36' r='0.5'/%3E%3Ccircle cx='44' cy='44' r='0.5'/%3E%3Ccircle cx='4' cy='44' r='0.5'/%3E%3Ccircle cx='20' cy='52' r='0.5'/%3E%3Ccircle cx='52' cy='52' r='0.5'/%3E%3Ccircle cx='4' cy='60' r='0.5'/%3E%3Ccircle cx='28' cy='60' r='0.5'/%3E%3Ccircle cx='44' cy='60' r='0.5'/%3E%3Ccircle cx='60' cy='4' r='1.25'/%3E%3Ccircle cx='20' cy='4' r='1.25'/%3E%3Ccircle cx='36' cy='4' r='1.25'/%3E%3Ccircle cx='4' cy='12' r='1.25'/%3E%3Ccircle cx='12' cy='20' r='1.25'/%3E%3Ccircle cx='60' cy='20' r='1.25'/%3E%3Ccircle cx='4' cy='36' r='1.25'/%3E%3Ccircle cx='20' cy='36' r='1.25'/%3E%3Ccircle cx='36' cy='36' r='1.25'/%3E%3Ccircle cx='52' cy='36' r='1.25'/%3E%3Ccircle cx='12' cy='44' r='1.25'/%3E%3Ccircle cx='52' cy='44' r='1.25'/%3E%3Ccircle cx='28' cy='52' r='1.25'/%3E%3Ccircle cx='44' cy='52' r='1.25'/%3E%3Ccircle cx='12' cy='60' r='1.25'/%3E%3Ccircle cx='36' cy='60' r='1.25'/%3E%3Ccircle cx='60' cy='60' r='1.25'/%3E%3Ccircle cx='44' cy='12' r='1.25'/%3E%3C/svg%3E");
+	--SVGHoneycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 28'%3E%3Ccircle cx='8' cy='14' r='8'/%3E%3Ccircle cx='32' cy='28' r='8'/%3E%3Ccircle cx='32' r='8'/%3E%3C/svg%3E");
+	--SVGDots: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 64'%3E%3Ccircle cx='47.98' cy='32.15' r='12'/%3E%3Ccircle cx='-0.02' cy='32.15' r='12'/%3E%3Ccircle cx='23.98' cy='0.15' r='12'/%3E%3Ccircle cx='23.98' cy='64.15' r='12'/%3E%3C/svg%3E");
+}
+
+/* -- RESET -- */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	vertical-align:baseline;
+	background:transparent; }
+sup { vertical-align:text-top; font-size:smaller; }
+sub { vertical-align:sub; font-size:smaller; }
+div, td, th { vertical-align:top; }
+body { line-height:1.25; }
+ul { list-style:none; }
+blockquote,
+q { quotes:none; }
+blockquote:before,
+blockquote:after,
+q:before,
+q:after { content:''; content:none; } 
+
+/* remember to define focus styles! */
+:focus { outline:0; }
+
+/* remember to highlight inserts somehow! */
+ins { text-decoration:none; }
+del { text-decoration:line-through; }
+
+/* new object tag fix */
+object { display:block; outline:none; }	
+
+/* box-sizing: border-box */
+* { box-sizing:border-box; }
+
+/* -- FONTS -- */
+@font-face {
+	font-family: 'odudo'; /* semi-bold */
+	src: url(data:application/font-woff;charset=utf-8;base64,d09GRgABAAAAABv8ABEAAAAAKJwAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAAb2AAAABwAAAAcfMT4yUdERUYAABs0AAAALQAAADIAuwE3R1BPUwAAG7gAAAAgAAAAIGyRdI9HU1VCAAAbZAAAAFEAAAB00Rvi3E9TLzIAAAH4AAAATQAAAGBo5K7sY21hcAAAA7AAAADbAAABilNdxkFjdnQgAAAEjAAAAAQAAAAEACECeWdhc3AAABssAAAACAAAAAgAAAAQZ2x5ZgAABXgAABJeAAAa5Hr6GyRoZWFkAAABgAAAADYAAAA2C9K9A2hoZWEAAAG4AAAAHgAAACQH8AOxaG10eAAAAkgAAAFlAAAB7PE+ER9sb2NhAAAEkAAAAOUAAAD40rfZmG1heHAAAAHYAAAAHwAAACAAwgBrbmFtZQAAF9gAAAI7AAAEknaVBqZwb3N0AAAaFAAAARcAAAHBDJRh3XdlYmYAABv0AAAABgAAAAbIAFmeAAEAAAABGZkaxQQyXw889QAfA+gAAAAA0tvnjwAAAADVxHh//+v/LwQUA0gAAAAIAAIAAAAAAAB42mNgZGBgfv/vKwMDi8P/10BShAEoggKqAY0iBakAAHjaY2BkYGCoZrBiYGUAASYgZmQAiTkw6IEEABY1AS4AeNpjYGb8wxTBwMrAwtQFpBkYvCE0YxyDEaMOkM/AzgAHSEwGhlDvcD8GBwYF1T/MCv8tGBiY3zNyKzAwNIPkGL8w7QFSCgzMAAn1C94AAAB42jVRO0sDYRCc3U/sxEKLIKTIGXOGOw4vSjCIIQQkUZAYsFAsrEQFQxBBwULsRBDERrQwVUD/gJVdGgsF8QFWNoJEMIWFaKmT4zwYZm7f366sIQZ+Mk0kKd7gyi5sfYel3bCNS12BjSZsmUSasOSMvjlYeEVUTuHinrYGIjqPjBxhQIeR1RJcrcLXPNK6jrx8IkHbmJYZf8vcFnOu6V+ET7bkG1GTZa8W88rMeWGPR7JNdCJtbPou2T9DnFDv0W5oPyb/kEcR11zIVdp64WkBMT1kjzs45gqO3mBE6xjSBfZLsU6D86dYa4koUHf9fugm+24xVwPu1wnEZYN6m3qKs/bBEwc9nMuXcXhmh/VLRDGI8dtxsk/fOZJS4f8g7TNImBWyzbqz7MO3SY07feIMNb57mfHcfXuXUgdMkfqfI7zJA3EQYpW4ILwwPoQ+w+/IcbfN4FZW+4aEFcQyX76AP3vFThMAAAB42mNgYGBmgGAZBkYGEGgB8hjBfBaGDCAtxiAAFGFjqGNYwLBWgUtBREFSQVZBXyFe9c///0B5BbA4g4KAgoSCDEz8/+P/h/5ve5DyIP5BzIOoB54PpG7VQc3HAhjZGOCSjExAggldAdCJLKxs7BycXNw8vHz8AoJCwiKiYuISklLSMrJy8gqKSsoqqmrqGppa2jq6evoGhkbGJqZm5haWVtY2tnb2Do5Ozi6ubu4enl7ePr5+/gGBQcEhoWHhEZFR0TGxcfEJiQzUA0lgsqi4rLyklHhdAJAsMZMAACECeXjaY2Bg0IJCJ4Ywhg6Gc4wijCGMSYxVjJMYdzFeYLzH+IaJgYmPyYLJh6mAaQXTEaYPzBLMOsw5zBOYtzBfYH7E/I2Fg8WKpYdlDcsDViZWJVY71gjWFtYVrHtYr7H+YhNgs2CLYqthW8R2hZ2J3Y49gr2GfQr7NvYb7F84+DgUOAw4nDhCOJI4CjimcRzieMLJx2nGGcbZxbmB8wrnNy4xLj2uNK4erjVct7g5uNW4o7iLuKdwr+E+x/2Oh4dHjSeMJ4lnEs8ZILyFA77g+cbLwivEq8Crx2vDG8CbAoZFAArBQL4AAAB42rVZe1xTV56/50QSBERCEsIzkFzyIiRAXjeghFdBeVSsFEUUpAgIQUG0XmtpUav4RECtoPjqQ6Ez3eq0nZl+2s50urW2jrU705ad6XRhZj6t047t2N3u2qm1ctnfOfcS3W4/u/vP+uGeJPee3/v7e5wrgxk9w6A0PMLIGAXjeB4xGfNfUMxirjufl4dMzH9BhuEr87yM3A4ht19QyNHt+S8gct+l1CvNLiWrR7P/+vbbeGSqRY9rGAYz6QzDvIyvAs9whuGULqXcYHJ7nTFq53Y2Jy0tx3oOe6cun0vLsVhyyH4zTkH1dL+CYVRml9YFV03WWmc6XDjlTfjHkH0GWN6BfQlMMmitYBUuuFiOXpyLXi4FXHMR3MPvaPbE9Wp2mtot/eaAZaumJ65b87ApYDpgbjUOxx9IwCmtvWuuwL81va1ExPXeXgYx5unD6DPZQsbBMEa1XKFhPSYzF+Nyej1uk9nE+RHncWlitAoTa5Br1DqsJX8y9Nnqys57l9yzuMTiLL3/SIisqrCzyF/gcZpdUcb4JJlMjvVZhcb379sc2bZOXbCpKN1gyUkr676nSbXmgbC05tR0Q3RSwtxIjGRoro5bDOYyIaDLtCwM/4UJYyKZWIiUDbzj9LpF0TEqxKJoZ4xGDd71uBnygNz3Bm+9V9zcXLxg9epdqHeT0J3gtVi8ZrS/r6mpr6nfZzLDj0Or+5pWLyhZLXTgq1OJuMecGG82xydOPdNE7+8xJSaYzQmJDETGPP0NLsefM1rwvZl4X6swy1kihoNLFKrQcqCCOgZUkTk5M1ESly/OW2UtrmnsW+bkR/lK/xLfaH56en56mTXlkK0YFY1VLHbO62vcUDKvtIrnq4ralA2bbtjz7fZ8waV7Tp/tzCO+QAQjzEWKEYqQGgkZ9Jl3egyZ8dcEbSEOBNpQ2VpkLpg/39/QfyBu9VNNzWMrcy989uEVst8A+1Xi/mQEgTUrdIj4rOlAf4N//vy4/CsffnYhd+VYc9NTlL8BrUbd+JdgO4M0LBgOqFCYOdbjMnNagAOnVaDuRT4ft8jn9S5a5PX6FnE+H/ZVchxXSRcvPIN7XtEWw/Q0nodjiXzgB8yAE7DB88a7xse7UPmGjz7a8O674t6k6eeYV5kuYrcWUL0P7K6iZsOzdOZLtA6tJc+MHr0GrRN+9WVPjyQD1vNMH2CHCSLG5Txv1SVZ0xJ11hyrNSkxDfbFwuazol/nIcTGdqDkTvhJ8y17+hZOgZiHM3EMA1H1KCnElGqV2+uCiCvVFAGXLvf3Xx7YUZjhKCx0ZBTK+5tRWHP/QJPw9ybU4Sgqcgh/J6uolxGW9SBgNsTR41K6NHpYMyabhJ814Q5+6hDPo5tknx+Wb/F3TDTDuDzIC7knV5j9SKtDc5FeU4pCDXKzcY1xWe77lRVhhRdQBI9yLC06nTpr4UpDUf6Vis+2iD4CG5RgA5FLMAoKmzkdEhPahjziF9ZAmBOb1OiVZfuba/aqNyuLbPa8wgyjKdlmS3bENsfW5VV1odMLOhr719favdl+u6Og25asszny0os2V5WJPsuCJRfsC2PmzERX70FQKl0enFu5Q3gLLWsR3n8WzeL7+3n0ZyHlK0bC8C0cBnTx8MMZVJQUHlE7lV7DKrwoou3I8Jq8Tssaa4l7wUK3LbUlA917bW4sEobb2o/lOpfOX9i6ML4CcfxDoVSfQuBbDHznUPRSnItZq9JiajpBBiprPTzcHhhOmthwOlBeHihDU3ioLXD0aKDIjboKp/6lzOMur3C5QU8TcLkC/IC7S0Wt08g6PjjLo9EPcEfqCESQ2CNj5oFcNfhdxSQx1hnJRLA3WC/MYq0AHWRSEAhI0S+sGfvf3JdhdW8a5X+dnG6DWpCSUVBA0IVO6hs8jfv3N3oa9NkVVZs2VVUM26CcpCSnC2EFIv4KxDhAD8IZ+G+AXQ3D0DKpkLEc9KGYYAV9c3w46f2R3rahdwNl5W5POf4bsVc4cG14/FpFaxnYLPYc5jy6AfFUA2JnlHR6xVQg386nQSZZaV+DFZ1LTEtLTLJahZ/prCTbrKI+Bsjji5RPJOhDHUHhJoOWdTwHcjIp7Wnn2izUSvISfgmJJMsRkzX9JeRnCCOH2uYxc54QDTr7ySdCX/SuXb27JuolzO3HLnRG7J8IIhICF3ZNCRhPCci5YcPYxo1i3fkSDYm8tEaPUaNVGNCDQt/Vq9GT9RPAjvBKgo2/wdfBWh18o/YqtH6aOjakdHn8SBa0HP2mt+6eroSHo2vKOHPhjuKVQ6IPcHj9zvI8V7rGk2H2TTO71bywBxyRpKPOgH4/fUumBWw4mOy70S4CE9wCNVVJUpTzOtBM5eK05HGU964GiJ44PlFbmVk2N81RFgiUO0wNKCbaER7t3bV84+nT61NNsQ7nicnJvSkAoGS7HX8++cSafk9qHEQ7oFUJn0fF3n/vycDTXRtOhzXPmUTeScFrz0+3J6fYJfxcpHkTBdXVpWHNegWUaRVcMpcMn7Ts8wlf+PZZLlpfffzCAzw/MgKFixfMKELEP5R6nAb0UbRzS7WH1DrIGGKxUSOmtkoqRBp0qXFLk3DNYkGorlt4d7HF57PEkKUFdXu7ah8m7B+pqXv19ZxFPiHMZ7FmvyHG9Bb+B/Al1MkQ0nNZOmpBIwYfRcWg4090LVra0Tw4eHnVoi0jxycm5Rtblg5eHqxp6J4ULk+K2CS6Pg+6hkO2QrWVdIySs2aqow3B6IBCR/7wh5GmxpaDB1saiS4fClc+5B//7eOkdoEi3wH9HWrS0zTgNA3pa4T6In/244/PkuLOP22/0PWm/WmJ7nOgU/4AHaX6Kf/4n/5kIURP2oCIp/PZLfwd2JsAtHoguQMaRbDLeTk9WolOr28ZOD4+MXKku3JVY1P/3tX3PZIoTKBnhJq2zomRE3/sbqgZbG0+0LxErL/gg510tpR0EbWnn9ClSIeWtHrfcgsu+kE04994g+eFUPop2RRKfXmHj1KiE/fDXmIH7GuEfXPpPgCBStwKKDFXJqYiyweWuoZNxgT0MlAUVdXP6LgMaLQiImUKDVVMUlYFiwLH5h35pcnyngX+vtrufwk8brXvon7nn0E6fkLigz6l2L5bR4+k5SAvqWl7Utwra4a9scG9s1HQJUoZKxONG0YIMcMWy7jlrYqL1M6pr3E49QvKFjrRQeFtPujnt4CfJsgPBZ3EIpHZIKoG8y2HhHOUkzAXdVO3oX8VdvOA11SoH6S3zCaoRxSppDTMksqSG504MTFx4vjkJDN9eWDg8kH8+YRwaWIC+SYeG2xpHjx4ScK8hfpfSyYRwDspcJJDtSLsNV4UXr93z6oHwCt/tXCcpQVGlB0/736FeOg1bjH3mpg/qdPfgj7XoLJDzTQGB2NvCuQ5SUpOe6e94X/0VWXXPXhighacPX6Xc7HPMdCyZmBgN7c4p2Di5PGJieO9XTp3JTd/cfNAPzwJ5ui91G86KfpsMPp6cfqWaaRhBkfmHTmVQwCHwuv2VeT+qsWUnW0CpTOp5vyOFYWt8Sj9tWyTMYfExDF9E30JNd9CagiZhx1yMaU4OnbJtboQWqLNihg094Gel+WmyKQIpdxlzvQWViyt3zlLPhTujjVGRzpNJUuKNoX2rDxULVMplBHR6nBDemqzWybrWP7offK4ObHqpChDWuGDdRQLUBexTcwBlZj7EqxYjR6HbaoECypx0ZNP2iiMbtrEfngLrxZzQCUmDB1MZ5IH/K7M+sCSvzIfEHTg0gEIGC88ai8osKMd5FvTgQNNaAfwAWb4R3ROI3wSEPWozNb34gsHLJ+suQp0QihB8SHcQXWF/bIhWs+l/RJJOAKqx7dtaOjaesRyrmPD+s5zhDYHvSoUo7eAHl0QciUebpB5MlgnOTMrCVZoYQlHbv9TT/kHzowN5J054x88+zR/+zY/DWTkEzHT4pyYCTy2BPXQckQJEQgeWebRvr5j/lFw21nQ4dYtXvj4I57/COnE8wD2izlPfI1IusNgymoMWCE8e4Of+gbd/xXOHesW4tPP70CfptOZtAeFySLIVBFCYgMXCquvH39sEwblNojnE1h+LJ4f9HAgRT8WPu5EyeQ4KZ3bpnuY70QeWhJYuMzj46tWPSbr56fqpD0oFnTrI3OJysVpXTLWvLuXTDco9upV9KB0DjqF02hnZeh0kzb1H42NjZR++gvsYT7Ft+nZkDMrfp75tht76gIrxbnrJl6Ibot5TvLGI7ZIOmVIh2Y1NrIDuTXtw8Prqv1rhX9qLSsNlPJ8Bnf0d0PudGF3eaC0NAC8IE/w/fgX0K8SaN2hORGswMHRBCaTJWR2rs4fYNmzvmJXebnLXVaGbh8dP+rL5NFv+b8YhW1lMGG2lknnwZvoz6Cj+u4e7pKaOBl09M2192XOd5eWuudl3bdkbWBoKLSmwVXWWp5ZVw1z+1HQjQXdSmd0+56dZGYJ6oZN7GBeNdgaWOBjR6cl5Yi1w78bNnbyU69LmpG6dhOzoJeS+k5PRzJtsOHGhLgcyCDHrLArujR9Qf69DXzXsSPtnYPC7i8U+bWF7zkyvXX3j6wLHD6jN7qdIgbRUtAR8A+ESTSBxIR3e+fBBKRIMA4MIPZttn1ZJS4xxqs2Cl9D4u9f3sjTGshOZ+JS0CeWcpK6pUF6PRM0965jzUuH2J31y+9x+mxZufklAbC5Kv9Nah26wQvPPNTjatPl+mwkzMKL5R7wg9tDagwIc4CecTTKVE867tNvM9FGmSu2saPuhS72HZZ9xopub1vxLI/0qW536rM8CfLvtURncuz9Gp8XzyGqO3O/XCYygoo3qHNkJBnSbb0se4bF2nR9ksOuY9OmrvEolBceE21XTWciBviEkp4XLb5Pg9ODWPqUasU4TK5++/VV7NhpHJvut9t1KVMrrCvQCl7I+EmRmGdgF7ol+p9OtIoZa5SkjCjQ6znbexPHWHbsxUB2O8+/G/dTYocw9BRfT+nBFsQC/Rzx7K6OgaARNCgdo4kaXeryalzCT/1bfCJftRyNiPJkyyBeVlGekiJwxp3s9/wJkaOekbnZUWcq62THnGyqk/01y+53lizx+2uXbwW3prIuF3su+Ek8ZLTn529dLtmHLSAv/r/JuyMkRoNDQACb6mIvAWtXybIt/PfY9dRKdcMEvBRkOo0muQ4+T5UmDI/7lfGjkM3IK4KJZPbRcTWgh54a6Zls2oeJ7SpaIWdqhesHqwXJxvYSH7F1MLeaoBCykjKFfCQhyODuqhckD3w0D0TeM+PpXXUN3cn2UhbY+kqIhOq8QeGPM8WoR8jk+U4j5DyXIeyZYS5iJADn1Ggxw74PesNCPwSFeC4V3XjEkfoT6jOWpfiwQh3bD3rBL61BfMtC3po6Zv3XAV1L4P/Py6qzYkoTMlOzomPT4jQPlC6AgSdJE59sP9gc6mudE2dUxqlDwxOSMhMKFttXpUTPjVQpPZ1F9ZKOi/BhcpI2gooecAAZgGH0R2VLL+w8dsyYyPMvoYnTG99JMEr19RuwSSPiVk7qRS6ieUOclosMo9gNEGBHty2v3Yp6eGGSdbvZ5+CzduvW2ucY8b0HTqPn97vnBdPBrvWHsk/UniBEv0dWSFfUM/P+TVYM+39oXjAMt7cuXrN2KPvIita22iFC+wmKEG6gJEKvEb6QeJB8+xZ43DUv0IZP5wWzwsG1tXKPtLU+wrW2cd2Bdr53B79vH7+jl9+7V+qZGZAPN4ifgjrLFWYvJ0sa7lh3LOfUgjHrQ7ZdRP4NFMEL287pN2kfRSWS/uh1oJXmBZk4L6hgXkCHrwFBy79vQyuPbhBumE7wKMIk9fqH0XZZPKEN0VDHzrxig29eWiwATmoFlFQSq+32ijZTAsclmALldnu8yek0xUfxgfJTicbNpvjT5e08rMWcZ8GpeKP0jmwec0qcNcgs4W1tvSj7EbXzYbRZlKsVhXF3ZFNhQdkw4yc54kCUMd7hKA+Y4jkuHsQ7okxxpxZ4uOLT8Sa+vRzWzaaEU+WBmbpZLZuHthP+nJfzIx3S6mTwRQa9WhGJHNjswDAmK04mZakdWalxMSnOdF+CtdgWp9hszI7UJxrj1Mm24oWmLYbq5boIHK2OilRqZuPZkdklvoSMdQkKJI+KjFBpY2VzM0//7+92/z+eZTHX8Shqn3mGR6f2X7+Lbpb6Dt0s9e3YIN3/9F7eAM9el56xnGtgnXMtPBPPTP/n//OBfcuD+4CLVuLUKnKbeRdOlhuAV5Cl1Cv16IYQQS6G+U+EDHwkAAB42qWSzW7TQBSFz9hpaVCBNioIIVUaiQq1iFhO1DQRYZNmWSmtSEvF0k5c24p/IjsJZIvY8ghIPAJPwZK3YM8jcMaZNgVlAcKWPd/M3HvO/FwAj8UzCCyeDj5qFtjBT80G7oiHmk3sireaS6iIz5rX8Mp4rnkdFeOT5g08Mr5rLuOeKTRvomw+1byFu2ZX8zbHXbqIUpm9D4WjYoF9fNNs4L5Y02zipdjVXMKeeKd5De/FV83r2DN8zRt4YXzRXMYT44fmTVTMB5q3sGNWNW9zvIcuUowxR4YQPgJMILmeAQ7Y1mGjhgbJZYTkXICYnCCCxb7PLIfZAXMH7A/hIS90kmK+w7iI7VI7L3oqymM7438IdNPxPAv9YCL3Bweybtca0p3LSRC7SWRJP3PGQTiQQy8P/cSSnSiSRXQuMy/3splHiVPqTPml1O/T0+EqFXlcb0g65kykvE6H02Eq+5Hjyr4Xh/I4jTj6moE+BVRixq7nTyOHUOM2ajwEG21c4ASX6JGWZtdW1RurG6OaVbPt9sXJZa9deCrLqrJcOP6VxqrEN8XJqVNOecrytyWeUUIWfHs0YOSE96PiZzrD5tfi26ahgxE1VcwVRyMqu7x5i/du4QiHaPJt0NjL8jBN5GJjZ31p2wsM0skgTWacsK1Wqx07Iy+dXFlR6NathnV02Gw2/mO//1JzWF0zwHlxCDHDewxVCSol4cZxHqSx7IVenofJ6E879b8WTaLVZXarpLCq4pZl9gv6nM4WAHjabc3HTkJhGITh9wOkIx177/2cozQ7gth775KoSGKM0bAw3pX1qrwFYzn/0tk8ySxmsPCXr08M/ssTiEWsWLFRgR0HTly48eDFRyV+AgQJESZClBhVVFNDLXXU00AjTTTTQitttNNBJ11000MvffQzwCBDaOg/38OMECdBkhRpRhljnAkmmWKaDDNkyTFLnjnmWWCRJZZZYZU11tlgky222WGXPfY54JAjjjnhlDPOKYhNKsQuDnGKS9ziEa/4pFL8EpCghCTMMy+888ErbxKRqMTsxZvHu2vdxHCUb0ualtGUuV8NTdOUutJQDitHlHFlQplUppRpZcZUV7u67r4qFcv3lxeFh2uzMvKmcdN4PvsNf+JJpgAAAQAB//8AD3jaY2BkYGDgAWIlBi0GJgZmBkYGJyB2BkJmBheGKiCbBSjLBMSMEAwANDYB8wAAAHjaY2BkYGDgYpBj0GFgzEksyWPgYGABijD8/88AkmFMTs4tAIoxQHhAOTYgzQTUocLADBbhA2IxMIuJwYfBF6wOIiMAFJFgkEGTA2IAUHkHpwAAAAABAAAACgAcAB4AAWxhdG4ACAAEAAAAAP//AAAAAAAAAAAAAQAAAADUJJi6AAAAANLb548AAAAA1cR4fwABWZ7H/wAA) format('woff');
+	font-weight: bold;
+	font-style: normal;
+
+}
+
+@font-face {
+	font-family: 'odudo'; /* bold */
+	src: url(data:application/font-woff;charset=utf-8;base64,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) format('woff');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ghiya'; /* default */
+	src: url(data:application/font-woff;charset=utf-8;base64,  ) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* HTML */
+html { font-size: 100%;	-moz-osx-font-smoothing: grayscale;	-webkit-font-smoothing: antialiased; font-weight: normal; box-sizing:border-box; -webkit-backface-visibility: hidden; }
+*, *:before, *:after { box-sizing: inherit; }
+
+body { font-family: Arial, Sans-serif; color: var(--GraySlate); font-size: 100%; overflow-y: scroll; }
+h1 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: 'odudo', Sans-serif; font-size: 2em; font-weight: 900; color: var(--GraySlate); letter-spacing:-1px; }
+h2 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: 'odudo', Sans-serif; font-size: 1.625em; font-weight: 800; color: var(--GraySlate); letter-spacing:-1px; }
+h3 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: 'odudo', Sans-serif; font-size: 1.375em; font-weight: bold; color: var(--GraySlate); }
+h4 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: 'odudo', Sans-serif; font-size: 1.25em; font-weight: bold; color: var(--GraySlate); }
+h5 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: 'odudo', Sans-serif; font-size: 1.125em; font-weight: bold; color: var(--GraySlate); }
+	/* slightly lighter version of grayslate */
+h6 { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-family: Arial, Sans-serif; font-size: 0.75em; font-weight: 800; text-transform: uppercase; color: var(--GraySlate); }
+	/* much lighter version of grayslate */
+p { display: block; clear: both; margin: 1rem 1rem 0 1rem; font-size: 1.0em; line-height: 1.5em; }
+blockquote { margin:1em 5em 0 2em; padding:0; }
+
+ul, dl, ol { display:block; margin:1rem 1rem 1rem 1.5rem; padding:0; text-align:left; } 
+dl > dt { margin:0; padding:0 1em 0 0; }
+dl > dd { margin:0; padding:0 1em 0 0; }
+
+/* lists inheritance margins fix */
+li ul { margin:1em 1em 1em 0; padding:0; }
+
+/* lists ordered types variants */
+ol > li { display:list-item; padding:0 1em 0.5em 0; vertical-align:top; } /* fix for IE 7+ */
+ol.upper-alpha li { list-style-type:upper-alpha; margin-bottom:1em; }
+ol.lower-alpha li { list-style-type:lower-alpha; margin-bottom:1em; }
+
+/* tables with some prudent defaults */
+table { margin:0; border:0; border-collapse:collapse; padding:0; border-spacing:0; }
+tr { vertical-align:top; }
+
+/* special */
+abbr, acronym { border-bottom:dotted 1px red; font-style:normal; cursor:help; }
+code, var, kbd, pre { font-family:Consolas, Monaco, monospace; color:white; }
+ins { text-decoration:none; color:green; }
+
+/* text effects */
+sub, sup { font-size:0.625em; line-height: 0; position: relative; vertical-align:baseline; }
+sup { top: -0.4em; }
+sub { top: 0.4em; }
+strong { font-weight:bold; }
+del { color:dimgray; }
+
+/* image display defaults */
+img,
+h1 img,
+h2 img,
+h3 img,
+h4 img,
+p img,
+blockquote img,
+li img { display:inline-block; }
+
+/* --		HYPERLINKS		-- */
+a {	cursor: pointer; }
+a:link,
+a:visited {	color: var(--BlueSea); text-decoration: none; }
+a:hover,
+a:active {	color: var(--BlueSea); text-decoration: underline; }
+
+/* global fix for linked image border */
+a img {	border: none; text-decoration: none; }
+
+/* anchor positioning static top nav */
+.FAQ .MID a:not([href]) { display:block; position:relative; top:-7rem; visibility:hidden; }
+
+/* fitGFX - basic containr for centering and standardizing graphics to height/width constrained window, eg tiles, SVGs */
+.fitGFX { }
+.fitGFX svg,
+.fitGFX img { margin:0 auto; padding:0; width:100%; height:100%; }
+
+.fitGFX > svg > use,
+svg.fitGFX > use { margin:0 auto;}/* for external svg sheets that use "use" '*/
+
+/* --		FORMS			-- */
+form {}
+
+fieldset { display:block; margin:0.5em 0 0 0; border:0; padding:0 0 0.5em 0; text-align:left; }
+fieldset.centered { margin-left:auto; margin-right:auto; width:auto; }
+
+legend {
+	text-align: center;
+	font: 800 0.875em/2em sans-serif;
+	padding-left: 0.25rem;
+	padding-bottom: 0;
+	margin-bottom: 1rem;
+	text-transform: uppercase;
+	color: #a7b5c0;
+	display: block;
+	border-bottom-width: 1px;
+	border-style: solid;
+	border-image: linear-gradient(to right, transparent, #a7b5c0, transparent);
+	border-image-slice: 1;
+	width: 100%;
+}
+
+label {
+	display: block;
+	box-sizing: border-box;
+	clear: left;
+	margin: 0 0.25rem 0 0.375rem;
+	padding-top: 0.5rem;
+	text-align: left;
+	font: bold 0.875rem/1.125em Arial, sans-serif;
+	color: var(--LabelGray);
+}
+
+label.required:before { content: "*"; }
+label > span { font-size:0.75em; line-height:1.1; font-weight:normal; color: var(--LabelGray);}
+
+select {
+	display: block;
+	clear: left;
+	margin: 0.125rem 0.125rem 0.25rem 0.25rem;
+	padding: 0.5em 0.25em;
+	height: 2.25rem;
+	font: bold 1rem/1.25em Arial, sans-serif;
+}
+
+select:focus { box-shadow:0 0 3px 1px var(--BlueOcean); border-color: var(--BlueOcean); }
+
+option { font:bold 1rem/1.25rem Arial, sans-serif; display:block; padding:0.25em; }
+
+textarea,
+.textarea {
+	display: block;
+	clear: left;
+	margin: 0.125rem 0.25rem 0.25rem 0.25rem;
+	padding: 0.5em 0.25em;
+	font: bold 1rem/1.25em Consolas, Monaco, "Courier New", Courier, monospace;
+	border-radius: 0.25em;
+}
+
+input {
+	display: block;
+	clear: left;
+	margin: 0.125rem 0.25rem 0.25rem 0.25rem;
+	padding: 0.375em 0.25em;
+	font: bold 1.125rem/1rem Consolas, Monaco, "Courier New", Courier, monospace;
+	border-radius: 0.125em;
+}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="password"] {
+		border: 1px solid #b6bbbf;
+		box-shadow: inset 1px 1px 3px 0 #ced4d9;
+		border-radius: 2px;
+	}
+
+	input[type="text"]:focus,
+	input[type="password"]:focus { box-shadow:0 0 3px 0 var(--BlueOcean); border-color:var(--BlueOcean); }
+
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		padding: 0.5em 0.875em 0.5em 0.875em;
+		font: bold 0.75rem/1.5rem Arial, sans-serif;
+		color: white;
+		border: none;
+		background-color:var(--BlueSea);
+		cursor: pointer;
+		white-space: nowrap;
+		transition: all 0.3s;
+		border-radius: 0.5em;
+	}
+
+	input[type="submit"].grand,
+	input[type="reset"].grand,
+	input[type="button"].grand {
+		box-sizing: border-box;
+		display: inline-block !important;
+		font-family: 'odudo', Arial, Sans-serif;
+		font-size: 1.5rem;
+		padding: 0.5em 1em 0.5em 0.75em;
+		white-space: unset;
+		height: auto;
+	}
+
+	/* full width */
+	input[type="submit"].full,
+	input[type="reset"].full,
+	input[type="button"].full {
+		width: calc(100% - 1rem);
+		margin: 1em 0.5rem;
+	}
+
+		input[type="submit"]:disabled,
+		input[type="reset"]:disabled,
+		input[type="button"]:disabled {
+			color: darkgray;
+			background-color: darkslategray;
+		}
+
+		input[type="submit"]:active,
+		input[type="reset"]:active,
+		input[type="button"]:active,
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		input[type="button"]:hover {
+			text-decoration: none;
+			cursor: pointer;
+			color: white;
+			background-color: var(--BlueOcean);
+			transition: all 0.3s;
+		}
+
+		input[type="submit"]:disabled:hover,
+		input[type="reset"]:disabled:hover,
+		input[type="button"]:disabled:hover {
+			text-decoration: none;
+			cursor: not-allowed;
+			color: darkgray;
+			background-color: silver;
+		}
+
+input[type="hidden"] { display: none; }
+
+
+/* scale for checkbox and radio */
+input[type="checkbox"],
+input[type="radio"] { transform: scale(1.5); margin-left:0.125em; margin-right:0.25em; } /* margin required to "push-down" element to baseline of label */
+
+input[type=image] { display:inline-block;}
+input[type="checkbox"],
+input[type="radio"] { display:inline-block; margin-right:0.4em; }
+
+/* ********* NOTE ********** */
+/* all checkboxes should be within labels for clickability, but might not be when rendered by .NET */
+	
+form .readonly { color:silver; }
+
+
+/* Special form Arrangements */
+
+/* INPUT-INLINE used to keep inputs on same line */
+.input-inline { display:block; clear:left; float:left; margin:0; padding:0; }
+	/* direct decendants required */
+	.input-inline > select { float:left; clear:unset; display:block; }
+	.input-inline > input {	float:left; clear:unset; display:block; }
+	/* input[type=checkbox] should always be inside inline-input */
+	.input-inline > input[type="checkbox"],
+	.input-inline > input[type="radio"] { clear:unset; float:unset; display:inline-block; }
+	.input-inline > input[type="checkbox"] + label,
+	.input-inline > input[type="radio"] + label { clear:unset; float:unset; display:inline-block; }
+	/* for extra long labels */
+	.input-inline.wrap > input[type="checkbox"] { display:inline; }
+	.input-inline.wrap > input[type="checkbox"] + label { display:inline; }
+
+
+/* INPUT-LABEL-INLINE used to keep input/label stacked pairs on same line */
+.input-label-inline { display:block; clear:unset; float:left; margin:0 0.5rem 0 0; padding:0; }
+	/* direct decendants required */
+	.input-label-inline > label:first-child { float:left; clear:unset; display:block; }
+	.input-label-inline > label + select,
+	.input-label-inline > label + textarea,
+	.input-label-inline > label + input { float:left; clear:left; display:block; }
+	.input-label-inline > input:first-child,
+	.input-label-inline > textarea:first-child { float:left; clear:unset; display:block; margin-top:calc(2em + 1px); }
+	/* input[type=checkbox] - !!!labels often wrap these inputs */
+	.input-label-inline > label:only-child { float:left; clear:unset; display:block; margin-top:calc(2em + 1px); }
+	.input-label-inline > label:only-child > input[type="checkbox"],
+	.input-label-inline > label:only-child > input[type="radio"] { clear:unset; float:unset; display:inline-block;}
+	/* when label is justaposed with input checkbox */
+	.input-label-inline > input[type="checkbox"] + label,
+	.input-label-inline > input[type="radio"] + label { clear:unset; float:unset; display:block;}
+	/* for extra long labels
+	.input-label-inline.wrap > input[type="checkbox"] { display:inline; }
+	.input-label-inline.wrap > input[type="checkbox"] + label { display:inline; } */
+
+
+
+/* for IE, even v.7!, gotta love IE */
+input[readonly="readonly"],
+input[readonly="readonly"]:hover,
+input[readonly="readonly"]:focus { color:silver; }
+
+form *:disabled { background-color:gainsboro; color:silver; }
+
+
+/* FORM ARRANGEMENT */
+
+/* -- Linear Form Arrangement (horizontal labels) : requires a container with floats. inline-blocks do not work due to baseline vartical alignment problem
+fieldset.linear { display:block; clear:left; width:auto; padding:0.25rem; margin:0.25rem auto; }
+fieldset.linear label { display:block; float:left; clear:none; }
+fieldset.linear select { display:block; float:left; clear:none; }
+fieldset.linear input { display:block; float:left; clear:none; }
+fieldset.linear input[type="submit"],
+fieldset.linear input[type="reset"],
+fieldset.linear input[type="button"] { display:block; cursor:pointer;}
+fieldset.linear input[type="text"],
+fieldset.linear input[type="password"],
+fieldset.linear input[type="file"] { display:block; }
+fieldset.linear input[type="hidden"] { display:none; }
+fieldset.linear input[type="checkbox"],
+fieldset.linear input[type="radio"],
+fieldset.linear input[type="image"] { display:block; padding:0; } -- */
+
+
+/* -- Column Form Arrangement .form_columnar -- */
+.form_columnar label { margin: 0.5em 0.5rem 0.125rem 0.5rem; padding: 0;}
+
+	.form_columnar label + input[type="text"],
+	.form_columnar label + input[type="email"],
+	.form_columnar label + input[type="password"] { margin-top: 0;}
+
+	.form_columnar input[type="text"],
+	.form_columnar input[type="email"],
+	.form_columnar input[type="password"] {
+		display: block;
+		box-sizing: border-box;
+		position: relative;
+		margin: 1rem 0.5rem 1rem 0.5rem;
+		width: calc(100% - 1rem);
+		outline: none;
+		line-height: 1.5;
+		padding: 0.5em 0.75rem;
+		background: white;
+		color: black;
+	}
+
+	.form_columnar input[type="text"]:focus,
+	.form_columnar input[type="email"]:focus,
+	.form_columnar input[type="password"]:focus {outline: 0;}
+
+/* WebKit, Edge */
+	.form_columnar input[type="text"]::-webkit-input-placeholder,
+	.form_columnar input[type="email"]::-webkit-input-placeholder,
+	.form_columnar input[type="password"]::-webkit-input-placeholder {color:white;}
+/* Firefox 4-18 */
+	.form_columnar input[type="text"]:-moz-placeholder,
+	.form_columnar input[type="email"]:-moz-placeholder,
+	.form_columnar input[type="password"]:-moz-placeholder {color: white;opacity: 1;}
+/* Firefox 19+ */
+	.form_columnar input[type="text"]::-moz-placeholder,
+	.form_columnar input[type="email"]::-moz-placeholder,
+	.form_columnar input[type="password"]::-moz-placeholder {color: white;opacity: 1;}
+/* IE 10-11 */
+	.form_columnar input[type="text"]:-ms-input-placeholder,
+	.form_columnar input[type="email"]:-ms-input-placeholder,
+	.form_columnar input[type="password"]:-ms-input-placeholder {color: white;}
+/* Edge */
+	.form_columnar input[type="text"]::-ms-input-placeholder,
+	.form_columnar input[type="email"]::-ms-input-placeholder,
+	.form_columnar input[type="password"]::-ms-input-placeholder {color: white;}
+/* MODERN BROWSER */
+	.form_columnar input[type="text"]::placeholder,
+	.form_columnar input[type="email"]::placeholder,
+	.form_columnar input[type="password"]::placeholder {color: white;}
+
+	.form_columnar input[type="submit"] {
+		width: calc(100% - 1rem);
+		margin: 1em 0.5rem;
+		padding-top: 0.75em;
+		padding-bottom: 0.75em;
+	}
+
+	.form_columnar input[type="submit"]:active {}
+
+
+.form_columnar span.error { /* error display */
+	display: block;
+	width: 100%;
+	position: relative;
+	float: left;
+	color: crimson !important;
+	font-size: 0.75rem;
+	font-weight: normal;
+	padding: 0 0.5em 1rem 0.5em;
+	text-align: left !important;
+}
+
+.form_columnar a.button,
+.form_columnar a.button.alt {width: calc(100% - 1rem);}
+
+
+/* FORM THEME */
+
+/* -- .FormNG -- */
+.FormNG {font-family: 'Open Sans', Arial, sans-serif;font-size: 0.875rem; /* default font size */}
+
+	.FormNG label {
+		margin: 0;
+		padding: 0;
+		height: 0;
+		opacity: 0;
+	}
+
+	.FormNG input[type="text"],
+	.FormNG input[type="email"],
+	.FormNG input[type="password"] {
+		display: block;
+		box-sizing: border-box;
+		position: relative;
+		margin: 0.5rem 0.5rem 1rem 0.5rem;
+		width: calc(100% - 1rem);
+		outline: none;
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: normal;
+		letter-spacing: inherit;
+		font-weight: normal;
+		line-height: 1.5;
+		padding: 0.5em 0.75rem;
+		background: white;
+		color: black;
+	}
+
+	/* WebKit, Edge */
+	.FormNG input[type="text"]::-webkit-input-placeholder,
+	.FormNG input[type="email"]::-webkit-input-placeholder,
+	.FormNG input[type="password"]::-webkit-input-placeholder {color: darkgray;}
+	/* Firefox 4-18 */
+	.FormNG input[type="text"]:-moz-placeholder,
+	.FormNG input[type="email"]:-moz-placeholder,
+	.FormNG input[type="password"]:-moz-placeholder {color: darkgray;opacity: 1;}
+	/* Firefox 19+ */
+	.FormNG input[type="text"]::-moz-placeholder,
+	.FormNG input[type="email"]::-moz-placeholder,
+	.FormNG input[type="password"]::-moz-placeholder {color: darkgray;opacity: 1;	}
+	/* IE 10-11 */
+	.FormNG input[type="text"]:-ms-input-placeholder,
+	.FormNG input[type="email"]:-ms-input-placeholder,
+	.FormNG input[type="password"]:-ms-input-placeholder {color: darkgrey;}
+	/* Edge */
+	.FormNG input[type="text"]::-ms-input-placeholder,
+	.FormNG input[type="email"]::-ms-input-placeholder,
+	.FormNG input[type="password"]::-ms-input-placeholder {color: darkgray;}
+	/* MODERN BROWSER */
+	.FormNG input[type="text"]::placeholder,
+	.FormNG input[type="email"]::placeholder,
+	.FormNG input[type="password"]::placeholder {color: dimgray;}
+
+	.FormNG input[type="submit"] {
+		-webkit-appearance: none; /* needed to override iOS */
+		border-radius: 0; /* needed to override iOS */
+		font-size: unset;
+		font-size: inherit;
+		width: calc(100% - 1rem);
+		padding-top: 0.75em;
+		padding-bottom: 0.75em;
+		background: unset;
+		background-color: var(--BlueOcean);
+	}
+
+	.FormNG input[type="submit"]:active {
+		background: unset;
+		background-color: #00beff;
+	}
+
+	.FormNG .form_columnar a.button.alt:link,
+	.FormNG .form_columnar a.button.alt:visited {
+		color: #0099cc;
+		box-shadow: 0 0 0 1px #0099cc inset;
+		background: unset;
+	}
+
+
+/* BUTTONS 
+	remember to think of a.buttons and buttons like form elements instead or stylized links !!!!
+*/
+
+	/* --  button style -- */
+	button {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		border: none;
+		cursor:pointer;
+	}
+
+	button,
+	a.button {
+		display: inline-block;
+		margin: 0.125rem 0.25rem;
+		padding: 0.5em 1em 0.5em 1em;
+		white-space: nowrap;
+		font-family: 'odudo', Arial, Sans-serif;
+		font-size: 0.875em;
+		line-height: 2em;
+		font-weight: 800;
+		border-radius: 0.5em;
+		text-align: center;
+	}
+
+	button,
+	a.button,
+	a.button:link,
+	a.button:visited {
+		text-decoration: none; /* needed for subsequent parent classes for some reason */
+		color: white;
+		background-color:var(--BlueSea);
+		transition: all 0.3s;
+	}
+
+	/* alt */
+	button.alt,
+	a.button.alt,
+	a.button.alt:link,
+	a.button.alt:visited {
+		text-decoration: none;
+		color:var(--BlueSea);
+		background-color: transparent;
+		box-shadow: 0 0 0 2px var(--BlueSea) inset;
+	}
+
+	button:hover,
+	button:active,
+	a.button:hover,
+	a.button:active {
+		text-decoration: none !Important;
+		color: white;
+		background-color: var(--BlueSea);
+		transition: all 0.3s;
+	}
+
+		button.alt:hover,
+		button.alt:active,
+		a.button.alt:hover,
+		a.button.alt:active {
+			text-decoration: none !Important;
+			color: var(--BlueOcean);
+			background-color: transparent;
+			box-shadow: 0 0 0 2px var(--BlueOcean) inset;
+			transition: all 0.3s;
+		}
+
+	button:focus,
+	a.button:focus	{
+		outline: 1px dotted black;
+		outline-offset: -0.25em;
+	}
+
+	/* disabled style */
+	a.button.disabled {}
+	a.button.disabled:link,
+	a.button.disabled:visited,
+	a.button.disabled:active,
+	a.button.disabled:hover {
+		color: darkgray !important;
+		background-color: silver !important;
+	}
+
+	/* button grand style - just an increase in size and font change */
+	button.grand,
+	a.button.grand {
+		padding: 0.25em 0.75em 0.25em 0.75em;
+		font-family: 'odudo', Arial, Sans-serif;
+		font-size: 1.5rem;
+		white-space: unset;
+	}
+
+	.button.grand.free {
+		background-color: var(--GreenMtn);
+	}
+
+
+	.prev::before { content:'\2039'; font-size:larger; margin-right:0.5em; }
+
+	.next::after { content:'\203A'; font-size:larger; margin-left:0.25em; }
+
+
+/* -- .NET Insanity Web Controls -- */
+table.RadioButtonList { width:100%; border-collapse:collapse; border:0; }
+table.RadioButtonList tr td { width:100%; padding:0.1em; vertical-align:text-bottom; background:transparent; white-space:nowrap; }
+table.RadioButtonList tr td input { display:inline; margin-right:0.25em; }
+table.RadioButtonList tr td label { display:inline; font:normal 1em/1.2em sans-serif; white-space:nowrap; }
+
+/* --- Universals --- */
+.legal, 
+.caption,
+.note { font-size:0.625em; }
+
+/* -- specials -- */
+.greyout { font-style:italic; color:darkgray; }
+.error { font-weight:bold; color:#BF0000; }
+.label { font-size: 0.75em; font-weight: 800; color: #6c8da2; text-transform:uppercase;}
+
+/* -- display overrides -- */
+.block { display:block; }
+.inline { display:inline; }
+.hidden, .hide { display:none; }
+
+/* -- clear overrides -- */
+.clear,
+.clearboth { clear:both; }
+.clearleft { clear:left; }
+.clearright { clear:right; }
+.unclear, .noclear { clear:none; }
+
+/* -- global error (usually in a span tag) from M$.NET -- */
+.error { padding:0.5em; font-weight:bold; color:red; }
+p.error, span.error { display: block; clear: both; margin: 0.25em; padding: 0.25em; text-align: left; font-size: 0.75em; font-weight: normal; }
+/* double it */
+.dbl { font-size:1.5em; line-height:0.5em; padding-left:2px; padding-right:2px; }
+
+/* continue */
+a.continue { display:inline-block; color:white; margin:-0.25rem 0; height:1.5em; font-size:1em; background:linear-gradient(315deg, transparent 0.3em, var(--BlueOcean) 0) bottom left;	background-repeat:no-repeat; }
+a.continue::before { content:"go"; padding-left:0.35em;  padding-right:0.35em; }
+a.continue:hover { color:white; background:linear-gradient(315deg, transparent 0.3em, var(--GreenMtn) 0) bottom left; text-decoration:none; }
+
+
+/* ############################################################ */
+/*					ICONS  SVG encoded in CSS					*/
+/*	//css-tricks.com/probably-dont-base64-svg/					*/
+/*	//codepen.io/tigt/post/optimizing-svgs-in-data-uris			*/
+/* ############################################################ */
+
+[class^="icon-svg"] { /* in most all cases icons are square which matches their viewBox aspect ratio when sizing. colors are also set in SVG, good for restricting color use */
+	display:inline-block;
+	vertical-align:middle;
+	height:1em;
+	width:1em;
+	background-repeat:no-repeat;
+	background-size:contain;
+	background-position:0 0;
+}
+
+.icon-svg-star { /*  use single quoted attributes, escape chars : < = %3C , > = %3E , # = %23   */
+	background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath style='fill:%23ffd200;' d='M49.3,29.8c0.8-1.8,8-18.5,8-18.5s-17.6,4.4-19.5,4.9C36.3,14.9,22.7,2.9,22.7,2.9S21.4,21,21.3,23C19.6,24,4,33.3,4,33.3s16.7,6.8,18.7,7.5c0.5,2,4.4,19.6,4.4,19.6S38.7,46.5,40,45c2,0.2,20,1.9,20,1.9S50.5,31.7,49.3,29.8'/%3E%3C/svg%3E");padding-right:1.125em;}
+
+.icon-svg-star.white { /*  use single quoted attributes, escape chars : < = %3C , > = %3E , # = %23   */
+	background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath style='fill:%23ffffff;' d='M49.3,29.8c0.8-1.8,8-18.5,8-18.5s-17.6,4.4-19.5,4.9C36.3,14.9,22.7,2.9,22.7,2.9S21.4,21,21.3,23C19.6,24,4,33.3,4,33.3s16.7,6.8,18.7,7.5c0.5,2,4.4,19.6,4.4,19.6S38.7,46.5,40,45c2,0.2,20,1.9,20,1.9S50.5,31.7,49.3,29.8'/%3E%3C/svg%3E");}
+
+.icon-svg-check { /*  use single quoted attributes, escape chars : < = %3C , > = %3E , # = %23   */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath style='fill:%236fa338;' d='M21.4,46.8c0.3-0.5,0.7-0.9,1-1.4c7-9.9,14.6-19.3,22.9-28.1c3.6-3.7,7.2-7.4,10.8-11c0.9-0.9,1.8-1.7,3-2.1c1.1-0.4,1.9-0.2,2.6,0.6c0.6,0.7,0.6,1.5,0.3,2.3c-0.3,1.1-1,2.1-1.8,3c-2.5,2.9-5.1,5.7-7.6,8.6C44,28.4,36.5,39,29.7,50.1c-1.4,2.3-2.7,4.6-4.1,6.9c-0.4,0.6-0.9,1.3-1.4,1.7c-2.3,2-5.4,1.5-6.9-1.2c-0.6-1-1-2.2-1.5-3.3c-2.3-5.2-5.1-10.1-8.8-14.5c-0.9-1.1-2-2.1-3-3.1c-0.4-0.4-0.8-0.9-1.1-1.4c-0.8-1.4-0.5-3,0.8-4c0.7-0.6,1.6-0.7,2.5-0.3c0.9,0.4,1.8,0.9,2.6,1.4c3.5,2.5,6.3,5.6,8.9,9c1.2,1.5,2.3,3.2,3.4,4.7C21.1,46.4,21.3,46.5,21.4,46.8z'/%3E%3C/svg%3E");}
+
+.icon-svg-bumpout { /* for ::after links with bumpout */ }
+
+
+/* ############################################################# */
+/*                  ICONS  SVG external source                   */
+/* ############################################################# */
+
+svg.svgIcon { display: inline-block; vertical-align: text-bottom; height: 1em; width: 1em; fill: currentColor; /* cascading fill color will be adopted by svgs */}
+
+
+/* ############################################################# */
+/*                  LOGOS  SVG external source                   */
+/* ############################################################# */
+
+svg.svgLogo { pointer-events: none; /* default behavior to prevent SVG logo disappearing in IE11 */}
+
+
+/* ############################################################# */
+/*                  TABLES                                       */
+/* ############################################################# */
+
+/* --- DATATABLE  Default --- */ 
+table.datatable { display:table; clear:both; width:calc(100% - 0.5rem); margin:0.25rem; font-size:1rem; }
+.datatable > caption {padding: 0 0 1rem 0;vertical-align: bottom;text-align: center;font-family: 'odudo', Arial, Sans-Serif;font-size: 1.25em;font-weight: 600;color: var(--GraySlate);}
+.datatable > thead > tr > th { padding: 1rem 0.25rem 0.25rem 0.25rem; background-color:transparent; font-size: 1rem; font-weight: 800; color: var(--GraySlate); vertical-align: bottom; text-align: left; }
+.datatable > thead > tr > td { padding: 0 0.25rem 0 0.25rem; background-color: transparent; font-size: 0.75rem; font-weight: 600; color: var(--GraySlate); vertical-align: bottom; text-align: left; }
+.datatable > thead > tr:last-child > th,
+.datatable > thead > tr:last-child > td { border-bottom:4px solid var(--GraySlate);}
+.datatable > tfoot > tr:first-child { border-top:4px solid var(--GraySlate);}
+.datatable > tfoot > tr > td { padding:1em; background-color:transparent; font-size:0.75em; white-space:normal; text-align: left; color: var(--GraySlate); }
+.datatable > tfoot > tr > th { padding:0.5em; border:none; background-color:transparent; font-size:0.75rem; white-space:normal; text-align: left; color: var(--GraySlate); }
+.datatable > tbody > tr > th { background-color: none; font-weight:800;  }
+.datatable > tbody > tr { border-bottom:1px solid var(--GraySlate); }
+.datatable > tbody > tr > td { padding: 0.5rem 0.25rem; font-size: 0.875rem;font-weight: 600;text-align: left;}
+.datatable > tbody > tr > td div.combos > span { padding-right:0.75em; } /* for p3 p4 payout table */
+
+/* fix to prevent sub-table striping & bordering within datatables w00t! */
+.datatable tbody tr td table tr { background-color:transparent !important; border:none !important; }
+
+/* DATATABLE INVERSE COLOR White on Transparent */
+.datatable.inverse > caption {	color:#ffffff; }
+.datatable.inverse > thead > tr > th { background-color: transparent; color:white; }
+.datatable.inverse > thead > tr > td { background-color: transparent; color:white; }
+.datatable.inverse > thead > tr:last-child > th,
+.datatable.inverse > thead > tr:last-child > td { border-bottom: 4px solid white;}
+.datatable.inverse > tfoot > tr:first-child { border-top:4px solid white;}
+.datatable.inverse > tfoot > tr > td { background-color:transparent; color:white; }
+.datatable.inverse > tfoot > tr > th { background-color:transparent; color:white; }
+.datatable.inverse > tbody > tr > th { background-color:transparent; }
+.datatable.inverse > tbody > tr { background-color:transparent; border-bottom:1px solid var(--WhiteCloud);}
+
+/* --- matrixtable --- used in claim-prizes  */
+table.matrixtable {	clear:none;	width:calc(100% - 2rem); margin:1rem 1rem; border-collapse:collapse; background-color:transparent;}
+.matrixtable caption { padding: 0 0 1rem 0; vertical-align: bottom;text-align: center;font-family: 'odudo', Arial, Sans-Serif;font-size: 1.25em;font-weight: 600;color: var(--GraySlate);}
+.matrixtable thead tr th { font-size:1em; font-weight:600; color:var(--GraySlate); text-align:center; padding:1em 0.5em; background-color:var(--WhiteCloud); border:1px solid var(--GraySlate);}
+.matrixtable thead tr th:first-child { background-color:transparent; border:none; }
+.matrixtable tbody tr td { font-size:1em; font-weight:600; color:var(--GoldenSky); text-align:center; padding:1em 0.5em; background-color:var(--GraySlate); border:1px solid var(--GraySlate);}
+.matrixtable tbody tr th { font-size:1em; font-weight:600; color:var(--GraySlate); text-align:left; padding:1em 0.5em; background-color:var(--WhiteCloud); border:1px solid var(--GraySlate);}
+
+/* --- juxtable --- */
+table.juxtable { clear:none; width:calc(100% - 1rem); margin:0.5rem; border-collapse:collapse; background-color:white; }
+.juxtable caption { padding: 0 0 1rem 0;vertical-align: bottom;text-align: center;font-family: 'odudo', Arial, Sans-Serif;font-size: 1.25rem;font-weight: 600;color: var(--GraySlate); }
+.juxtable tbody td { padding:0.5rem; vertical-align:middle;}
+.juxtable tbody td:first-child { font-size:0.75rem; font-weight:900; color:var(--GraySlate); text-align:left; text-transform:uppercase;}
+.juxtable tbody td:last-child {	text-align: right; font-weight:bold; color:var(--GraySlate); }
+/* allows table footer-like captions to be immediately below table font: bold 1rem/1rem Consolas, Monaco, "Courier New", Courier, monospace; */
+.juxtable > tfoot td { padding:1rem; font-size:0.75em; text-align:left; }
+.juxtable > thead > tr,
+.juxtable > tfoot > tr { border-top:4px solid var(--GraySlate); }
+.juxtable > tbody > tr { border-bottom:1px solid var(--GraySlate); }
+
+
+/* --- listtable --- */
+table.listtable { clear:none; width:calc(100% - 1rem); margin:0.5rem; border-collapse:separate; background-color:white; } 
+.listtable th {	text-align:right; font-size:1.25em; line-height:1.5em; font-weight:bold; background:transparent; border:0; padding:2px 0.5em 2px 0.5em; color:var(--GraySlate); }
+.listtable td {	text-align:left; font:bold 1.4em/1.2em sans-serif; background:transparent; border:0; padding:2px 0.5em 2px 0.5em; color:var(--GraySlate); }
+/* allows table footer-like captions to be immediately below table */
+table.listtable + p.legal,
+table.listtable + p.caption { margin-top:0; }
+
+
+/* --- CheckBoxList --- .NET control --- */
+table.CheckBoxList { clear:none; width:calc(100% - 1rem); margin:0.5rem; border-collapse:collapse; background-color:white; }
+.CheckBoxList caption {	padding:1rem; vertical-align:bottom; text-align:center; font-family:'odudo', Arial, Sans-Serif; font-size:1.25rem; font-weight:600; color:var(--GraySlate); }
+.CheckBoxList tr { }
+.CheckBoxList td { padding:2px; text-align:left; }
+.CheckBoxList td input[type="checkbox"] { display:inline-block; transform:scale(1.5); margin-right:0;}
+.CheckBoxList td input[type="checkbox"] + label { display: inline-block; width: calc(100% - 2rem);}
