@@ -2,8 +2,8 @@ import os
 import cssbeautifier
 
 # ✅ Define Input and Output Folder
-INPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\CSS codes clean"  # Update this path
-OUTPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\CSS code formatted"  # Save formatted files in a new folder
+INPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\All CSS codes clean"  # Update this path
+OUTPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\All CSS code formatted"  # Save formatted files in a new folder
 
 # ✅ Ensure the output directory exists
 if not os.path.exists(OUTPUT_FOLDER):

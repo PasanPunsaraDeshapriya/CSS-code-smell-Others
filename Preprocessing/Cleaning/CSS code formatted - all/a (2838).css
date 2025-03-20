@@ -1,0 +1,215 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    width: 100%;
+    overflow: hidden
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/home.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(0.5px);
+    z-index: -1
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    width: 80%;
+    min-height: 80%;
+    height: fit-content;
+    background-color: hsla(119, 60%, 36%, 0.80);
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+.title {
+    font-size: 6.5rem;
+    color: white;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-style: italic;
+    font-weight: 900;
+    margin-bottom: 0.3em;
+    line-height: 1;
+    margin-top: 0.1em
+}
+
+.title2 {
+    font-size: 3.5rem;
+    color: white;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-style: italic;
+    font-weight: 900;
+    margin-bottom: 0.3em;
+    line-height: 1;
+    margin-top: 0.1em
+}
+
+.sub {
+    font-size: 2.5rem;
+    color: white;
+    margin-top: 1px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1
+}
+
+.button {
+    margin-top: 0.2em;
+    padding: 0.5em 1.5em;
+    background-color: var(--green-button);
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    width: 450px;
+    height: 70%;
+    background-image: linear-gradient(180deg, rgb(0, 255, 81), rgb(255, 255, 255));
+    animation: rotbgimg 5s linear infinite;
+    transition: all 0.2s linear;
+    z-index: 0
+}
+
+@keyframes rotbgimg {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    background: var(--green-button);
+    inset: 2px;
+    border-radius: 8px;
+    z-index: 1
+}
+
+.button:hover {
+    scale: 1.1
+}
+
+.button span {
+    position: relative;
+    z-index: 2
+}
+
+.preferences {
+    background-color: var(--backtable-color);
+    border-radius: 15px;
+    margin-top: 10px;
+    width: 40vh;
+    justify-self: center
+}
+
+.logocontainer {
+    background-color: var(--second-green);
+    border-radius: 15%;
+    margin-bottom: 2%
+}
+
+.preferences label {
+    color: white;
+    font-size: 2.0rem;
+    font-weight: 700;
+    background-color: var(--table-color);
+    width: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid white;
+    margin-left: 30px;
+    border-radius: 50%
+}
+
+.optiontext {
+    flex-grow: 1;
+    text-align: left
+}
+
+.optionss {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    font-weight: 500
+}
+
+.formcontent {
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center
+}
+
+.submitbut {
+    margin-top: 30px;
+    padding: 0.5em 1.5em;
+    background-color: var(--green-button);
+    color: white;
+    font-size: 1.7rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    width: 40vh;
+    justify-self: center
+}
+
+.submitbut:hover {
+    scale: 1.1
+}
+
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out
+}
+
+.dropdown-content.show {
+    max-height: 500px;
+    opacity: 10
+}

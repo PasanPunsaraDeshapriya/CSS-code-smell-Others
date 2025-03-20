@@ -52,6 +52,6 @@ def normalize_all_css_files(input_folder, output_folder):
             print(f"Normalized: {file_name}")
 
 # Example usage
-input_folder = "D:\IIT 4th year\FYP\Cleaning\CSS codes unclean"
-output_folder = "D:\IIT 4th year\FYP\Cleaning\CSS codes clean"
+input_folder = "D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\All CSS codes unclean"
+output_folder = "D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\All CSS codes clean"
 normalize_all_css_files(input_folder, output_folder)
