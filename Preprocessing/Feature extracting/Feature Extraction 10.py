@@ -3,9 +3,11 @@ import re
 import csv
 
 # ✅ Define Paths (Ensure Correct Formatting)
-INPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\Large CSS code formated"
-OUTPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Feature extracting" 
-OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, "css_features_large.csv")
+# INPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Cleaning\CSS code formatted - all"
+INPUT_FOLDER = r"D:\Documents\IIT\FYP\CSS-code-smell-Others\Preprocessing\Cleaning\CSS code formatted - all - small"
+# OUTPUT_FOLDER = r"D:\IIT 4th year\FYP\Creation\Preprocessing\Feature extracting" 
+OUTPUT_FOLDER = r"D:\Documents\IIT\FYP\CSS-code-smell-Others\Preprocessing\Feature extracting" 
+OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, "css_features_all_small.csv")
 
 # ✅ Ensure the directory exists before proceeding
 if not os.path.exists(INPUT_FOLDER):
@@ -100,7 +102,9 @@ def process_css_files(input_folder, output_csv):
         writer.writeheader()
 
     for file_path, file_number in files:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        print(f"Processeing: File {os.path.basename(file_path)} ....")
+        
+        with open(file_path, 'r', encoding='utf-8') as file: 
             css_code = file.read()
         
         features = extract_features_from_css(css_code)
@@ -113,7 +117,9 @@ def process_css_files(input_folder, output_csv):
 
         # ✅ Progress Logging
         processed_files += 1
-        print(f"Processed: File {file_number}")
+        print(f"✅ Processed: File {file_number}")
+
+        
         print(f"Processed {processed_files}/{total_files} files ({(processed_files / total_files) * 100:.2f}%).")
 
     print(f"✅ Feature extraction completed. Data saved to {output_csv}")
