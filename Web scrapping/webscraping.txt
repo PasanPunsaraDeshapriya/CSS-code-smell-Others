@@ -1,0 +1,85 @@
+from google.colab import drive, files
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from tqdm.notebook import tqdm
+from urllib.parse import urljoin
+import os
+
+# Mount Google Drive
+drive.mount('/content/drive')
+
+# Path to the CSV file in Google Drive
+csv_file_path = "/content/drive/My Drive/tranco.csv"  # Update with your actual file path
+
+# Function to find CSS files on a website
+def find_css_files(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code == 200:
+            soup = BeautifulSoup(response.text, "html.parser")
+            css_links = soup.find_all("link", rel="stylesheet")
+            return [urljoin(url, link["href"]) for link in css_links if "href" in link.attrs]
+    except Exception as e:
+        print(f"Error fetching {url}: {e}")
+    return []
+
+# Main function to scrape and download CSS files individually
+def scrape_and_download_css_files(file_path, output_dir, start_index=0, batch_size=1000, css_threshold=50 * 1024):
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Load websites from the CSV file
+    websites_df = pd.read_csv(file_path, header=None, names=["rank", "website"])
+    websites = websites_df["website"].tolist()
+
+    # Get the batch of websites
+    batch_websites = websites[start_index:start_index + batch_size]
+    failed_websites = []
+    success_count = 0
+
+    for index, website in enumerate(tqdm(batch_websites, desc="Scraping websites"), start=start_index):
+        url = f"http://{website}"  # Add HTTP scheme if not present
+        css_files = find_css_files(url)
+        if not css_files:
+            failed_websites.append(website)
+            continue
+
+        for css_url in css_files:
+            try:
+                # Fetch CSS file content
+                css_response = requests.get(css_url, timeout=10)
+                if css_response.status_code == 200 and len(css_response.content) > css_threshold:
+                    # Save CSS file
+                    filename = css_url.split("/")[-1]
+                    if not filename.endswith(".css"):
+                        filename += ".css"
+                    file_path = os.path.join(output_dir, filename)
+                    with open(file_path, "wb") as f:
+                        f.write(css_response.content)
+
+                    # Download the file to the local device immediately
+                    files.download(file_path)
+                    print(f"Downloaded CSS file from {css_url} to local device (size: {len(css_response.content)} bytes).")
+                    success_count += 1
+                    break  # Exit after the first successful CSS file
+            except Exception as e:
+                print(f"Error downloading CSS from {css_url}: {e}")
+                failed_websites.append(website)
+
+    print(f"Completed scraping websites from column {start_index} to column {start_index + len(batch_websites)}.")
+    print(f"Successful scrapes: {success_count}")
+    print(f"Failed websites: {len(failed_websites)}")
+
+    # Save failed websites for future review
+    failed_file = os.path.join(output_dir, f"failed_websites_{start_index}_{start_index + len(batch_websites)}.csv")
+    pd.DataFrame(failed_websites, columns=["website"]).to_csv(failed_file, index=False)
+    print(f"Failed websites saved to {failed_file}")
+
+# Parameters
+output_directory = "32_scraped_css_files"  # Directory to temporarily save CSS files
+start_index = 32000  # Update this value for subsequent batches
+batch_size = 1000  # Number of websites to process in this batch
+
+# Run the scraper for the specified batch
+scrape_and_download_css_files(csv_file_path, output_directory, start_index=start_index, batch_size=batch_size)

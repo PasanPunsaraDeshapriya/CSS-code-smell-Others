@@ -1,0 +1,107 @@
+# 📌 1. Imports
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error, r2_score, recall_score, f1_score
+import joblib
+
+# 📌 2. Load Dataset
+file_path = '/content/drive/MyDrive/css_features_all_small.csv'
+df = pd.read_csv(file_path)
+
+# 📌 3. Clean + Preprocess
+columns_to_drop = ['Unnamed: 0', 'file_number']
+df_cleaned = df.drop(columns=[col for col in columns_to_drop if col in df.columns], errors='ignore')
+df_cleaned.dropna(inplace=True)
+
+# 📌 4. Identify Code Smells
+smell_thresholds = df_cleaned.mean() + df_cleaned.std()
+df_smells = df_cleaned > smell_thresholds
+df_cleaned['Total_Code_Smells'] = df_smells.sum(axis=1)
+df_cleaned['Code_Smell_Types'] = df_smells.apply(lambda row: list(row[row].index), axis=1)
+
+# 📌 5. Normalize Features
+feature_columns = [col for col in df_cleaned.columns if col not in ['Total_Code_Smells', 'Code_Smell_Types']]
+scaler = StandardScaler()
+X_scaled = pd.DataFrame(scaler.fit_transform(df_cleaned[feature_columns]), columns=feature_columns)
+
+# 📌 6. KMeans Clustering
+kmeans = KMeans(n_clusters=4, random_state=42)
+df_cleaned['cluster'] = kmeans.fit_predict(X_scaled)
+X_scaled['cluster'] = df_cleaned['cluster']
+
+# 📌 7. Map Clusters → Severity Labels
+cluster_avg = df_cleaned.groupby('cluster')['Total_Code_Smells'].mean().sort_values()
+cluster_map = {
+    cluster_avg.index[0]: 'Clean',
+    cluster_avg.index[1]: 'Low',
+    cluster_avg.index[2]: 'Medium',
+    cluster_avg.index[3]: 'High'
+}
+df_cleaned['smell_severity_label'] = df_cleaned['cluster'].map(cluster_map)
+
+# 📌 8. PCA Visualization (Optional)
+pca = PCA(n_components=2)
+pca_result = pca.fit_transform(X_scaled.drop(columns=['cluster']))
+df_cleaned['PCA1'], df_cleaned['PCA2'] = pca_result[:, 0], pca_result[:, 1]
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_cleaned, x='PCA1', y='PCA2', hue='smell_severity_label', palette='Set1')
+plt.title("KMeans Clusters of CSS Files (PCA View)")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+# 📌 9. Train Random Forest Regressor
+
+# X = X_scaled
+X = X_scaled.drop(columns=['cluster'])  # 👈 removes that extra column
+y = df_cleaned['Total_Code_Smells']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+clf = RandomForestRegressor(n_estimators=100, random_state=42)
+clf.fit(X_train, y_train)
+y_pred = np.nan_to_num(clf.predict(X_test))
+
+# 📌 10. Evaluate Model
+y_pred_binary = np.where(y_pred > 0, 1, 0)
+y_test_binary = np.where(y_test > 0, 1, 0)
+
+print("🔍 Model Evaluation")
+print("MAE:", mean_absolute_error(y_test, y_pred))
+print("R2 Score:", r2_score(y_test, y_pred))
+print("Accuracy (%):", max(0, r2_score(y_test, y_pred) * 100))
+print("Recall:", recall_score(y_test_binary, y_pred_binary))
+print("F1 Score:", f1_score(y_test_binary, y_pred_binary))
+
+# 📌 11. Feature Importances
+importances = pd.Series(clf.feature_importances_, index=X.columns).sort_values(ascending=False)
+plt.figure(figsize=(10, 6))
+importances.head(15).plot(kind='barh')
+plt.title("Top Feature Importances")
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
+
+# 📌 12. Save the Model
+# save_path = '/content/css_smell_model_with_clustering.pkl'
+# joblib.dump(clf, save_path)
+# print(f"✅ Model saved to {save_path}")
+
+import joblib
+
+# Assuming you've already trained these
+joblib.dump(clf, "css_model.pkl")           # ✅ The RandomForestRegressor
+joblib.dump(scaler, "css_scaler.pkl")       # ✅ The StandardScaler
+joblib.dump(kmeans, "css_kmeans.pkl")       # ✅ The KMeans model
+
+from google.colab import files
+files.download("css_model.pkl")
+files.download("css_scaler.pkl")
+files.download("css_kmeans.pkl")
